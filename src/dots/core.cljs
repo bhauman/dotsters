@@ -5,39 +5,46 @@
    [jayq.core :refer [$ append ajax inner css $deferred when done resolve pipe on bind] :as jq]
    [jayq.util :refer [log]]
    [crate.core :as crate]
-   [clojure.string :refer [join blank?]])
+   [clojure.string :refer [join blank? replace-first]])
   (:require-macros [cljs.core.async.macros :as m :refer [go alt!]]))
 
-(defn mouseevent-chan [selector event msg-name]
-  (let [rc (chan)]
-      (bind ($ selector) event
-            #(do
-               (put! rc [msg-name {:x (.-pageX %) :y (.-pageY %)}])))
-    rc))
+(defn mouseevent-chan [rc selector event msg-name]
+  (bind ($ selector) event
+        #(do
+           (put! rc [msg-name {:x (.-pageX %) :y (.-pageY %)}]))))
 
-(defn drawstart-chan [selector]
-  (mouseevent-chan selector "mousedown" :drawstart))
+(defn touchevent-chan [rc selector event msg-name]
+  (bind ($ selector) event
+        #(let [touch (aget (.-touches (.-originalEvent %)) 0)]
+           (put! rc [msg-name {:x (.-pageX touch) :y (.-pageY touch)}]))))
 
-(defn drawend-chan [selector]
-  (mouseevent-chan selector "mouseup" :drawend))
+(defn drawstart-chan [ichan selector]
+  (mouseevent-chan ichan selector "mousedown" :drawstart)
+  (touchevent-chan ichan selector "touchstart" :drawstart))
 
-(defn drawer-chan [selector]
-  (mouseevent-chan selector "mousemove" :draw))
+(defn drawend-chan [ichan selector]
+  (mouseevent-chan ichan selector "mouseup" :drawend)
+  (mouseevent-chan ichan selector "touchend" :drawend))
+
+(defn drawer-chan [ichan selector]
+  (mouseevent-chan ichan selector "mousemove" :draw)
+  (touchevent-chan ichan selector "touchmove" :draw))
 
 (defn draw-chan [selector]
-  (let [down-ch (drawstart-chan selector)
-        up-ch   (drawend-chan selector)
-        draw-ch (drawer-chan selector)
+  (let [input-chan (chan)
         rc      (chan)]
+    (drawstart-chan input-chan selector)
+    (drawend-chan   input-chan selector)
+    (drawer-chan    input-chan selector)
     (go (loop []
-          (let [[val ch] (alts! [down-ch draw-ch up-ch])]
-            (if (= ch down-ch)
+          (let [val (<! input-chan)]
+            (if (= (first val) :drawstart)
               (do
                 (put! rc val)
                 (loop []
-                  (let [[val ch] (alts! [up-ch draw-ch down-ch])]
+                  (let [val (<! input-chan)]
                     (put! rc val)
-                    (if (= ch draw-ch)
+                    (if (= (first val) :draw)
                       (recur)))))
               (recur)))
           (recur)))
@@ -73,8 +80,7 @@
 (defn board [{:keys [board] :as state}]
   [:div.dots-game
    [:div.chain-line]
-   [:div.board]]
-)
+   [:div.board]])
 
 (defn create-dot [xpos ypos color]
   {:color color :elem (crate/html (dot [xpos ypos] color))})
@@ -82,10 +88,17 @@
 (defn remove-dot [{:keys [elem] :as dot}]
   (.remove ($ elem)))
 
+(defn at-correct-postion? [dot pos]
+  (let [[ex-top _] (dot-pos-to-abs-position pos)
+         act-top   (-> (css ($ (dot :elem)) "top") (replace-first "px" "") int)]
+    (log (prn-str [ex-top act-top]))
+    (= ex-top act-top)))
+
 (defn update-dot [dot pos]
   (if dot
-    (let [[top left] (dot-pos-to-abs-position pos)]
-      (css ($ (dot :elem)) {:top top :left left}))))
+    (let [$elem ($ (dot :elem))
+          [top left] (dot-pos-to-abs-position pos)]
+      (css $elem {:top top :left left}))))
 
 (defn add-dots-to-board [dots]
   (doseq [{:keys [elem]} dots]
@@ -96,30 +109,32 @@
          (crate/html (board state)))
   (mapv add-dots-to-board (state :board)))
 
-(defn dot-index [{:keys [x y]}]
-  (if (and (< 30 (mod x 50)) (< 30 (mod y 50)))
-    (let [ypos (- (dec board-size) (int (/ y 50)))
-          xpos (int (/ x 50))]
-      (if (and
-           (> board-size ypos)
-           (> board-size xpos))
-        [xpos ypos]))))
+(defn dot-index [offset {:keys [x y]}]
+  (let [[x y] (map - [x y] offset [15 15])]
+    (if (and (< 5 (mod x 50) 35) (< 5 (mod y 50) 35))
+      (let [ypos (- (dec board-size) (int (/ y 50)))
+            xpos (int (/ x 50))]
+        (if (and
+             (> board-size ypos)
+             (> board-size xpos))
+          [xpos ypos])))))
 
 (defn dot-follows? [state prev-dot cur-dot]
   (let [board (state :board)
         prev-dot-color (-> board (get-in prev-dot) :color)
         cur-dot-color (-> board (get-in cur-dot) :color)]
-    (log (prn-str [prev-dot-color cur-dot-color]))
     (or (nil? prev-dot)
         (and
          (= prev-dot-color cur-dot-color)
          (let [[cx cy] cur-dot
                [px py] prev-dot]
            (or
-            (or (= cx (inc px))
-                (= cx (dec px)))
-            (or (= cy (inc py))
-                (= cy (dec py)))))))))
+            (and (or (= cx (inc px))
+                     (= cx (dec px)))
+                 (= cy py))
+            (and (or (= cy (inc py))
+                     (= cy (dec py)))
+                 (= cx px))))))))
 
 (defn add-dot [{:keys [dot-chain] :as state} dot-pos]
   (if (dot-follows? state (last dot-chain) dot-pos)
@@ -127,16 +142,19 @@
     state))
 
 (defn render-chain-element [last-pos pos color]
-  (let [[top1 left] (dot-pos-to-center-position last-pos)
-        [top2 _] (dot-pos-to-center-position pos)
-        style (str "width: 5px; height: 50px; top:"
-                   (if (< top1 top2) top1 top2) "px; left: " ( - left 2) "px;")]
+  (let [[top1 left1] (dot-pos-to-center-position last-pos)
+        [top2 left2] (dot-pos-to-center-position pos)
+        [width height] (if (= left1 left2) [5 50] [50 5])
+        style (str "width: " width "px; height: " height "px; top:"
+                   (- (min top1 top2) 2)
+                   "px; left: "
+                   (- (min left1 left2) 2) "px;")]
     [:div {:style style :class (str "line " (name (or color :blue)))}]))
 
 (defn render-dot-chain [state]
   (let [dot-chain (state :dot-chain)
         color (-> state :board
-                  (get (first (state :dot-chain)))
+                  (get-in (first (state :dot-chain)))
                   :color)
         rends (map render-chain-element
                    (butlast dot-chain)
@@ -159,17 +177,15 @@
            (erase-dot-chain)
            state)
          (recur
-          (if-let [dot-pos (dot-index point)]
+          (if-let [dot-pos ((state :dot-index) point)]
             (add-dot state dot-pos)
             state)))))))
 
 (defn render-remove-dots-row-helper [dot-chain-set col]
-  (log (prn-str dot-chain-set))
   (let [dots-to-remove (keep-indexed #(if (dot-chain-set %1) %2) col)
         next_col     (keep-indexed #(if (not (dot-chain-set %1)) %2) col)]
     (doseq [dot dots-to-remove]
       (remove-dot dot))
-    (log (prn-str (count next_col)))
     (vec next_col)))
 
 (defn render-remove-dots [state dot-chain]
@@ -192,9 +208,10 @@
 
 (defn add-missing-dots [{:keys [board] :as state}]
     (assoc state :board
-           (map-indexed
-            #(add-missing-dots-helper %1 %2)
-            board)))
+           (vec
+            (map-indexed
+             #(add-missing-dots-helper %1 %2)
+             board))))
 
 (defn render-position-updates-helper [col-idx col]
   (go
@@ -204,10 +221,11 @@
            xd  (rest cur-col)]
        (if (not (nil? dot))
          (do
-           (<! (timeout 40))
-           (update-dot dot [col-idx pos])
+           (if (not (at-correct-postion? dot [col-idx pos]))
+             (do
+               (<! (timeout 40))
+               (update-dot dot [col-idx pos])))
            (recur xd (inc pos))))))))
-
 
 (defn render-position-updates [{:keys [board]}]
   (doall
@@ -239,5 +257,5 @@
     (range board-size))))
 
 (app-loop {:board (create-board)
+           :dot-index (partial dot-index [10 10])
            :dot-chain []})
-

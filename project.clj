@@ -13,7 +13,7 @@
                  ]
   :profiles {:dev {:source-paths ["dev"]}}  
   :plugins [[lein-cljsbuild "0.3.2"]]
-  ;;:repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+  :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
   :cljsbuild {
               :builds [{:source-paths ["src/dots"]
                         :compiler {:output-to "resources/public/js/compiled/dots.js"
