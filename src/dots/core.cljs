@@ -2,7 +2,7 @@
   (:require
    [cljs.core.async :as async
              :refer [<! >! chan close! sliding-buffer put! alts! timeout]]
-   [jayq.core :refer [$ append ajax inner css $deferred when done resolve pipe on bind] :as jq]
+   [jayq.core :refer [$ append ajax inner css $deferred when done resolve pipe on bind attr] :as jq]
    [jayq.util :refer [log]]
    [crate.core :as crate]
    [clojure.string :refer [join blank? replace-first]])
@@ -50,6 +50,7 @@
           (recur)))
     rc))
 
+(def initial-dot-position 13)
 (def board-size 6)
 
 (defn comp-pos [pos]
@@ -65,16 +66,18 @@
   (map (fn [x] (rand-color)) (range number)))
 
 (defn dot-pos-to-abs-position [[xpos ypos]]
-  [(+ 30 (* 50 (- (dec board-size) ypos)))
-   (+ 30 (* 50 xpos))])
+  [(+ 25 (* 45 (- (dec board-size) ypos)))
+   (+ 25 (* 45 xpos))])
 
 (defn dot-pos-to-center-position [dot-pos]
   (vec (map (partial + 10) (dot-pos-to-abs-position dot-pos))))
 
 (defn dot [pos color]
-  (let [[top left] (dot-pos-to-abs-position pos)
+  (let [[start-top _] (dot-pos-to-abs-position [0 initial-dot-position])
+        [top left] (dot-pos-to-abs-position pos)
         class (str "dot " (name color))
-        style (str "top:" top "px; left: " left "px;")]
+        style (str "top:" start-top "px; left: " left "px;")]
+    (log "start-top" start-top)
     [:div {:class class :style style}]))
 
 (defn board [{:keys [board] :as state}]
@@ -85,20 +88,39 @@
 (defn create-dot [xpos ypos color]
   {:color color :elem (crate/html (dot [xpos ypos] color))})
 
+(defn top-pos-from-transform [$elem]
+  (- (int (last (re-matches #".*translate3d\(.*,(.*)px,.*\).*"
+                            (attr $elem "style"))))
+     335))
+
 (defn remove-dot [{:keys [elem] :as dot}]
-  (.remove ($ elem)))
+  (go
+   (let [$elem ($ elem)
+         top (top-pos-from-transform $elem)]
+     (css $elem {"-webkit-transform"
+                 (str
+                  "translate3d(0," (+ 335 top) "px,0)" 
+                  "scale3d(0.1,0.1,0.1) ")})
+     (<! (timeout 200))
+     (.remove ($ elem))
+     )))
+
+
 
 (defn at-correct-postion? [dot pos]
   (let [[ex-top _] (dot-pos-to-abs-position pos)
-         act-top   (-> (css ($ (dot :elem)) "top") (replace-first "px" "") int)]
-    (log (prn-str [ex-top act-top]))
-    (= ex-top act-top)))
+        trans-top (top-pos-from-transform ($ (dot :elem)))]
+    (log "trans-top " (prn-str [ex-top act-top trans-top]))
+    (= ex-top trans-top)))
 
 (defn update-dot [dot pos]
   (if dot
     (let [$elem ($ (dot :elem))
           [top left] (dot-pos-to-abs-position pos)]
-      (css $elem {:top top :left left}))))
+      (css $elem {;;:top top
+                  :left left
+                  "-webkit-transform" (str "translate3d(0," (+ 335 top) "px, 0)")
+                  }))))
 
 (defn add-dots-to-board [dots]
   (doseq [{:keys [elem]} dots]
@@ -110,10 +132,10 @@
   (mapv add-dots-to-board (state :board)))
 
 (defn dot-index [offset {:keys [x y]}]
-  (let [[x y] (map - [x y] offset [15 15])]
-    (if (and (< 5 (mod x 50) 35) (< 5 (mod y 50) 35))
-      (let [ypos (- (dec board-size) (int (/ y 50)))
-            xpos (int (/ x 50))]
+  (let [[x y] (map - [x y] offset [12 12])]
+    (if (and (< 0 (mod x 45) 45) (< 0 (mod y 45) 45))
+      (let [ypos (- (dec board-size) (int (/ y 45)))
+            xpos (int (/ x 45))]
         (if (and
              (> board-size ypos)
              (> board-size xpos))
@@ -201,7 +223,7 @@
     col
     (let [new-dots (map create-dot
                         (repeat col-idx)
-                        (repeat 13)
+                        (repeat initial-dot-position)
                         (get-rand-colors (- board-size (count col))))]
       (add-dots-to-board new-dots)
       (vec (concat col new-dots)))))
@@ -241,7 +263,7 @@
        (log "before update" (prn-str (map count (state :board))))
        (render-position-updates state)
        (let [state (add-missing-dots state)]
-         (<! (timeout 300))
+         (<! (timeout 200))
          (render-position-updates state)
          (log "rendering" (prn-str state))
          (recur

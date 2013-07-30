@@ -14,6 +14,9 @@
 .chain-line .line { 
    position: absolute;
    background-color: rgb(131,176,249);
+   -webkit-transform: translate3d(0,0,0);
+   -moz-transform: translate3d(0,0,0);
+   transform: translate3d(0,0,0);
 }
 
 .dot {
@@ -22,7 +25,12 @@
    height: 20px;
    border-radius: 10px;
    background-color: rgb(131,176,249);
-   transition: all 0.1s;
+   -webkit-transition: all 0.2s; 
+   -webkit-transform: translate3d(0,0,0);
+   -moz-transition: all 0.2s; 
+   -moz-transform: translate3d(0,0,0);
+   transition: all 0.2s; 
+   transform: translate3d(0,0,0);
 }
 
 .dot.blue 

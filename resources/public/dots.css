@@ -23,7 +23,8 @@
    height: 20px;
    border-radius: 10px;
    background-color: rgb(131,176,249);
-   transition: all 0.1s;
+   /* transition: all 1.0s; */
+   /* -webkit-transform: translate3d(0,0,0); */
 }
 
 .dot.blue {
