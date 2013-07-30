@@ -2,10 +2,13 @@
   (:require
    [cljs.core.async :as async
              :refer [<! >! chan close! sliding-buffer put! alts! timeout]]
-   [jayq.core :refer [$ append ajax inner css $deferred when done resolve pipe on bind attr] :as jq]
+   [jayq.core :refer [$ append ajax inner css $deferred
+                      when done resolve pipe on bind attr
+                      offset] :as jq]
    [jayq.util :refer [log]]
    [crate.core :as crate]
-   [clojure.string :refer [join blank? replace-first]])
+   [clojure.string :refer [join blank? replace-first]]
+   [clojure.set :refer [union]])
   (:require-macros [cljs.core.async.macros :as m :refer [go alt!]]))
 
 (defn mouseevent-chan [rc selector event msg-name]
@@ -30,116 +33,112 @@
   (mouseevent-chan ichan selector "mousemove" :draw)
   (touchevent-chan ichan selector "touchmove" :draw))
 
+(defn get-drawing [input-chan out-chan]
+  (go (loop [msg (<! input-chan)]
+        (put! out-chan msg)
+        (if (= (first msg) :draw)
+          (recur (<! input-chan))))))
+
 (defn draw-chan [selector]
   (let [input-chan (chan)
-        rc      (chan)]
+        out-chan   (chan)]
     (drawstart-chan input-chan selector)
     (drawend-chan   input-chan selector)
     (drawer-chan    input-chan selector)
-    (go (loop []
-          (let [val (<! input-chan)]
-            (if (= (first val) :drawstart)
-              (do
-                (put! rc val)
-                (loop []
-                  (let [val (<! input-chan)]
-                    (put! rc val)
-                    (if (= (first val) :draw)
-                      (recur)))))
-              (recur)))
-          (recur)))
-    rc))
-
-(def initial-dot-position 13)
-(def board-size 6)
-
-(defn comp-pos [pos]
-  (- (dec board-size) pos))
+    (go (loop [[msg-name _ :as msg] (<! input-chan)]
+          (if (= msg-name :drawstart)
+            (do
+              (put! out-chan msg)
+              (<! (get-drawing input-chan out-chan))))
+          (recur (<! input-chan))))
+    out-chan))
 
 (def peice-colors [:blue :green :yellow :purple :red])
+(def offscreen-dot-position 13)
+(def board-size 6)
+(def number-colors (count peice-colors))
+(def grid-unit-size 45)
+(def dot-size 20)
+(def corner-offset (- grid-unit-size dot-size))
 
-(let [number-colors (count peice-colors)]
-  (defn rand-color []
-    (get peice-colors (rand-int number-colors))))
+(defn rand-colors []
+  (map #(get peice-colors (rand-int %))
+   (repeat number-colors)))
 
-(defn get-rand-colors [number]
-  (map (fn [x] (rand-color)) (range number)))
+(def reverse-board-position (partial - (dec board-size)))
+(def pos->coord #(+ corner-offset (* grid-unit-size %)))
 
-(defn dot-pos-to-abs-position [[xpos ypos]]
-  [(+ 25 (* 45 (- (dec board-size) ypos)))
-   (+ 25 (* 45 xpos))])
+(def offscreen-offset (-> offscreen-dot-position reverse-board-position pos->coord -))
 
-(defn dot-pos-to-center-position [dot-pos]
-  (vec (map (partial + 10) (dot-pos-to-abs-position dot-pos))))
+(defn pos->corner-coord [[xpos ypos]]
+  (mapv pos->coord [(reverse-board-position ypos) xpos]))
 
-(defn dot [pos color]
-  (let [[start-top _] (dot-pos-to-abs-position [0 initial-dot-position])
-        [top left] (dot-pos-to-abs-position pos)
+(defn pos->center-coord [dot-pos]
+  (mapv #(+ (/ dot-size 2) %) (pos->corner-coord dot-pos)))
+
+(defn starting-dot [pos color]
+  (let [[start-top left] (pos->corner-coord [(first pos) offscreen-dot-position])
         class (str "dot " (name color))
         style (str "top:" start-top "px; left: " left "px;")]
-    (log "start-top" start-top)
     [:div {:class class :style style}]))
 
 (defn board [{:keys [board] :as state}]
   [:div.dots-game
-   [:div.chain-line]
-   [:div.board]])
+   [:div.header 
+    [:div.heads "Time " [:span.time-val]]
+    [:div.heads "Score " [:span.score-val]]]
+   [:div.board-area
+    [:div.chain-line]
+    [:div.board]]])
 
 (defn create-dot [xpos ypos color]
-  {:color color :elem (crate/html (dot [xpos ypos] color))})
+  {:color color :elem (crate/html (starting-dot [xpos ypos] color))})
 
-(defn top-pos-from-transform [$elem]
+(defn top-coord-from-dot-elem [$elem]
   (- (int (last (re-matches #".*translate3d\(.*,(.*)px,.*\).*"
                             (attr $elem "style"))))
-     335))
+     offscreen-offset))
+
+(defn translate-top [top]
+  (str "translate3d(0," (+ offscreen-offset top) "px,0) "))
 
 (defn remove-dot [{:keys [elem] :as dot}]
   (go
    (let [$elem ($ elem)
-         top (top-pos-from-transform $elem)]
+         top (top-coord-from-dot-elem $elem)]
      (css $elem {"-webkit-transform"
-                 (str
-                  "translate3d(0," (+ 335 top) "px,0)" 
-                  "scale3d(0.1,0.1,0.1) ")})
+                 (str (translate-top top) " scale3d(0.1,0.1,0.1)")})
      (<! (timeout 200))
-     (.remove ($ elem))
-     )))
-
-
+     (.remove ($ elem)))))
 
 (defn at-correct-postion? [dot pos]
-  (let [[ex-top _] (dot-pos-to-abs-position pos)
-        trans-top (top-pos-from-transform ($ (dot :elem)))]
-    (log "trans-top " (prn-str [ex-top act-top trans-top]))
+  (let [[ex-top _] (pos->corner-coord pos)
+        trans-top (top-coord-from-dot-elem ($ (dot :elem)))]
     (= ex-top trans-top)))
 
 (defn update-dot [dot pos]
   (if dot
     (let [$elem ($ (dot :elem))
-          [top left] (dot-pos-to-abs-position pos)]
-      (css $elem {;;:top top
-                  :left left
-                  "-webkit-transform" (str "translate3d(0," (+ 335 top) "px, 0)")
-                  }))))
+          [top left] (pos->corner-coord pos)]
+      (css $elem {"-webkit-transform" (translate-top top)}))))
 
 (defn add-dots-to-board [dots]
   (doseq [{:keys [elem]} dots]
     (append ($ ".board") elem)))
 
 (defn render-view [state]
-  (inner ($ ".container")
-         (crate/html (board state)))
-  (mapv add-dots-to-board (state :board)))
+  (let [view-dom (crate/html (board state))]
+      (inner ($ ".container") view-dom)
+      (mapv add-dots-to-board (state :board))))
 
 (defn dot-index [offset {:keys [x y]}]
   (let [[x y] (map - [x y] offset [12 12])]
-    (if (and (< 0 (mod x 45) 45) (< 0 (mod y 45) 45))
-      (let [ypos (- (dec board-size) (int (/ y 45)))
-            xpos (int (/ x 45))]
-        (if (and
-             (> board-size ypos)
-             (> board-size xpos))
-          [xpos ypos])))))
+    (let [ypos (- (dec board-size) (int (/ y grid-unit-size)))
+          xpos (int (/ x grid-unit-size))]
+      (if (and
+           (> board-size ypos)
+           (> board-size xpos))
+        [xpos ypos]))))
 
 (defn dot-follows? [state prev-dot cur-dot]
   (let [board (state :board)
@@ -164,8 +163,8 @@
     state))
 
 (defn render-chain-element [last-pos pos color]
-  (let [[top1 left1] (dot-pos-to-center-position last-pos)
-        [top2 left2] (dot-pos-to-center-position pos)
+  (let [[top1 left1] (pos->center-coord last-pos)
+        [top2 left2] (pos->center-coord pos)
         [width height] (if (= left1 left2) [5 50] [50 5])
         style (str "width: " width "px; height: " height "px; top:"
                    (- (min top1 top2) 2)
@@ -223,8 +222,8 @@
     col
     (let [new-dots (map create-dot
                         (repeat col-idx)
-                        (repeat initial-dot-position)
-                        (get-rand-colors (- board-size (count col))))]
+                        (repeat offscreen-dot-position)
+                        (take (- board-size (count col)) (rand-colors)))]
       (add-dots-to-board new-dots)
       (vec (concat col new-dots)))))
 
@@ -255,29 +254,52 @@
     #(render-position-updates-helper %1 %2)
     board)))
 
-(defn app-loop [init-state]
-  (let [draw-ch (draw-chan "body")]
-    (render-view init-state)
-    (go
-     (loop [state init-state]
-       (log "before update" (prn-str (map count (state :board))))
-       (render-position-updates state)
-       (let [state (add-missing-dots state)]
-         (<! (timeout 200))
-         (render-position-updates state)
-         (log "rendering" (prn-str state))
-         (recur
-          (let [{:keys [dot-chain]} (<! (get-dots draw-ch state))]
-            (if (< 1 (count dot-chain))
-              (render-remove-dots state dot-chain)
-              state))))))))
+(defn render-score [{:keys [score]}]
+  (inner ($ ".score-val") score))
+
+(defn game-timer [seconds]
+  (go (loop [timer (timeout 1000)
+             time  seconds]
+        (inner ($ ".time-val") time)
+        (<! timer)
+        (if (= 0 time)
+          time
+          (recur (timeout 1000) (dec time))))))
 
 (defn create-board []
   (vec
    (map-indexed
-    (fn [i x] (vec (map-indexed (partial create-dot i) (get-rand-colors board-size)))) 
+    (fn [i x] (vec (map-indexed (partial create-dot i) (take board-size (rand-colors))))) 
     (range board-size))))
 
-(app-loop {:board (create-board)
-           :dot-index (partial dot-index [10 10])
-           :dot-chain []})
+(defn setup-game-state []
+  (let [init-state {:board (create-board)}]
+    (render-view init-state)
+    (let [board-offset ((juxt :left :top) (offset ($ ".board")))]
+      (assoc init-state :dot-index
+             (partial dot-index board-offset)
+             :dot-chain [] :score 0))))
+
+(defn app-loop [init-state]
+  (let [draw-ch (draw-chan "body")
+        game-over-ch (game-timer 60)]
+    (go
+     (loop [state init-state]
+       (render-score state)
+       (render-position-updates state)
+       (let [state (add-missing-dots state)]
+         (<! (timeout 200))
+         (render-position-updates state)
+         (let [[value ch] (alts! [(get-dots draw-ch state) game-over-ch])]
+           (if (= ch game-over-ch)
+             state ;; game over 
+             (recur
+              (let [{:keys [dot-chain]} value]
+                (if (< 1 (count dot-chain))
+                  (-> state
+                      (render-remove-dots dot-chain)
+                      (assoc :score (+ (state :score) (count (set dot-chain)))))
+                  state)
+                )))))))))
+
+(app-loop (setup-game-state))

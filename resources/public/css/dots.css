@@ -1,5 +1,31 @@
+
 .dots-game {
    position: relative;
+}
+
+.header {
+  width: 320px;
+}
+
+.heads {
+   background-color: rgb(124, 81, 162);
+   /* background-color: #eee; */
+   display: inline-block;
+   width: 160px;
+   height: 30px;
+   padding-top: 13px;
+   text-align: center;
+   color: rgba(255,255,255, 0.5);;
+   font-family: helvetica;
+}
+
+.time-val, .score-val {
+ color: white;
+}
+
+.board-area {
+   padding-left: 13px;
+   padding-top: 13px;
 }
 
 .board {
@@ -56,4 +82,10 @@
 .dot.red,
 .line.red {
    background-color: rgb(208, 84, 65);
+}
+
+@media (max-width: 480px){
+   body {
+      margin: 0px;
+   }
 }
