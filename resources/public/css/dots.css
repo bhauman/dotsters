@@ -143,37 +143,49 @@ a.start-new-game {
 }
 
 .levelish {
-   -webkit-animation-duration: 0.2s;
+   -webkit-animation-duration: 0.4s;
    -webkit-animation-iteration-count: 1;
 }
 
 .level-0 {
+   -webkit-transform: translate3d(0,360px,0);
    -webkit-animation-name: bounce-0;
 }
 
 .level-1 {
+   -webkit-transform: translate3d(0,405px,0);
    -webkit-animation-name: bounce-1;
 }
 
 .level-2 {
+   -webkit-transform: translate3d(0,450px,0);
    -webkit-animation-name: bounce-2;
 }
 
 .level-3 {
+   -webkit-transform: translate3d(0,495px,0);
    -webkit-animation-name: bounce-3;
 }
 
 .level-4 {
+   -webkit-transform: translate3d(0,540px,0);
    -webkit-animation-name: bounce-4;
 }
 
 .level-5 {
+   -webkit-transform: translate3d(0,585px,0);
    -webkit-animation-name: bounce-5;
 }
 
 @-webkit-keyframes bounce-0 {
   0% {
      -webkit-transform: translate3d(0,0,0);
+  }
+  60% {
+     -webkit-transform: translate3d(0,360px,0);
+  }   
+  90% {
+     -webkit-transform: translate3d(0,345px,0); /* - 10 */
   }
   100% {
      -webkit-transform: translate3d(0,360px,0);
@@ -184,6 +196,12 @@ a.start-new-game {
   0% {
      -webkit-transform: translate3d(0,0,0);
   }
+  60% {
+     -webkit-transform: translate3d(0,405px,0);
+  }   
+  90% {
+     -webkit-transform: translate3d(0,390px,0); /* - 10 */
+  }
   100% {
      -webkit-transform: translate3d(0,405px,0);
   }
@@ -192,6 +210,12 @@ a.start-new-game {
 @-webkit-keyframes bounce-2 {
   0% {
      -webkit-transform: translate3d(0,0,0);
+  }
+  60% {
+     -webkit-transform: translate3d(0,450px,0);
+  }   
+  90% {
+     -webkit-transform: translate3d(0,435px,0); /* - 10 */
   }
   100% {
      -webkit-transform: translate3d(0,450px,0);
@@ -203,6 +227,12 @@ a.start-new-game {
   0% {
      -webkit-transform: translate3d(0,0,0);
   }
+  60% {
+     -webkit-transform: translate3d(0,495px,0);
+  }   
+  90% {
+     -webkit-transform: translate3d(0,480px,0); /* - 10 */
+  }
   100% {
      -webkit-transform: translate3d(0,495px,0);
   }
@@ -213,6 +243,12 @@ a.start-new-game {
   0% {
      -webkit-transform: translate3d(0,0,0);
   }
+  60% {
+     -webkit-transform: translate3d(0,540px,0);
+  }   
+  90% {
+     -webkit-transform: translate3d(0,525px,0); /* - 10 */
+  }
   100% {
      -webkit-transform: translate3d(0,540px,0);
   }
@@ -222,9 +258,15 @@ a.start-new-game {
   0% {
      -webkit-transform: translate3d(0,0,0);
   }
+  60% {
+     -webkit-transform: translate3d(0,585px,0);
+  }   
+  90% {
+     -webkit-transform: translate3d(0,570px,0); /* - 10 */
+  }
   100% {
      -webkit-transform: translate3d(0,585px,0);
-  }
+  }   
 }
 
 @media (max-width: 480px){

@@ -89,11 +89,10 @@
 (defn pos->center-coord [dot-pos]
   (mapv #(+ (/ dot-size 2) %) (pos->corner-coord dot-pos)))
 
-
 (defn starting-dot [[top-pos _] color]
   (let [[start-top left] (pos->corner-coord [top-pos offscreen-dot-position])
         style (str "top:" start-top "px; left: " left "px;")]
-    [:div {:class (str "dot " (name color)) :style style}]))
+    [:div {:class (str "dot levelish " (name color)) :style style}]))
 
 (defn colorize-word [word]
   (map (fn [x c] [:span {:class (name c)} x]) word (rand-colors)))
@@ -143,6 +142,12 @@
      (<! (timeout 200))
      (.remove ($ elem)))))
 
+
+(defn _at-correct-postion? [dot pos]
+  (let [[ex-top _] (pos->corner-coord pos)
+        trans-top (top-coord-from-dot-elem ($ (dot :elem)))]
+    (= ex-top trans-top)))
+
 (defn at-correct-postion? [dot pos]
   (let [[ex-top _] (pos->corner-coord pos)
         trans-top (top-coord-from-dot-elem ($ (dot :elem)))]
@@ -150,9 +155,14 @@
 
 (defn update-dot [dot pos]
   (if dot
-    (let [$elem ($ (dot :elem))
-          [top left] (pos->corner-coord pos)]
-      (css $elem {"-webkit-transform" (translate-top top)}))))
+    (go
+     (let [$elem ($ (dot :elem))
+           [top left] (pos->corner-coord pos)]
+       (.addClass $elem (str "level-" (reverse-board-position (last pos))))
+       ;;(<! (timeout 10))
+       ;;(css $elem {"-webkit-transform" (translate-top top)})
+       ))
+))
 
 (defn add-dots-to-board [dots]
   (doseq [{:keys [elem]} dots]
@@ -310,7 +320,7 @@
    (loop [[dot & xd] col pos 0]
      (when (not (nil? dot))
        (when (not (at-correct-postion? dot [col-idx pos]))
-         (<! (timeout 40))
+         (<! (timeout 60))
          (update-dot dot [col-idx pos]))
        (recur xd (inc pos))))))
 
