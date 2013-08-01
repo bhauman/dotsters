@@ -51,12 +51,12 @@
    height: 20px;
    border-radius: 10px;
    background-color: rgb(131,176,249);
-   /*-webkit-transition: all 0.2s; 
+   -webkit-transition: all 0.2s; 
    -webkit-transform: translate3d(0,0,0);
    -moz-transition: all 0.2s; 
    -moz-transform: translate3d(0,0,0);
    transition: all 0.2s; 
-   transform: translate3d(0,0,0); */
+   transform: translate3d(0,0,0);
 }
 
 .dot-highlight {
@@ -176,7 +176,7 @@ a.start-new-game {
      -webkit-transform: translate3d(0,0,0);
   }
   100% {
-     -webkit-transform: scale3d(0,360px,0);
+     -webkit-transform: translate3d(0,360px,0);
   }
 }
 
@@ -185,7 +185,7 @@ a.start-new-game {
      -webkit-transform: translate3d(0,0,0);
   }
   100% {
-     -webkit-transform: scale3d(0,405px,0);
+     -webkit-transform: translate3d(0,405px,0);
   }
 }
 
@@ -194,7 +194,7 @@ a.start-new-game {
      -webkit-transform: translate3d(0,0,0);
   }
   100% {
-     -webkit-transform: scale3d(0,450px,0);
+     -webkit-transform: translate3d(0,450px,0);
   }
 }
 
@@ -204,7 +204,7 @@ a.start-new-game {
      -webkit-transform: translate3d(0,0,0);
   }
   100% {
-     -webkit-transform: scale3d(0,495px,0);
+     -webkit-transform: translate3d(0,495px,0);
   }
 }
 
@@ -214,7 +214,7 @@ a.start-new-game {
      -webkit-transform: translate3d(0,0,0);
   }
   100% {
-     -webkit-transform: scale3d(0,540px,0);
+     -webkit-transform: translate3d(0,540px,0);
   }
 }
 
@@ -223,7 +223,7 @@ a.start-new-game {
      -webkit-transform: translate3d(0,0,0);
   }
   100% {
-     -webkit-transform: scale3d(0,585px,0);
+     -webkit-transform: translate3d(0,585px,0);
   }
 }
 
