@@ -9,7 +9,7 @@
 }
 
 .heads {
-   background-color: rgb(124, 81, 162);
+   background-color: rgb(131, 70, 169);
    /* background-color: #eee; */
    display: inline-block;
    width: 160px;
@@ -51,12 +51,12 @@
    height: 20px;
    border-radius: 10px;
    background-color: rgb(131,176,249);
-   -webkit-transition: all 0.2s; 
+   /* -webkit-transition: all 0.2s; 
    -webkit-transform: translate3d(0,0,0);
    -moz-transition: all 0.2s; 
    -moz-transform: translate3d(0,0,0);
    transition: all 0.2s; 
-   transform: translate3d(0,0,0);
+   transform: translate3d(0,0,0); */
 }
 
 .dot-highlight {
@@ -72,23 +72,44 @@
 }
 
 .blue {
-   background-color: rgb(131,176,249);
+   background-color: rgb(118,172,255);
 }
 
 .green {
-   background-color: rgb(147,221,135);
+   background-color: rgb(128,230,121);
 }
 
 .purple {
-   background-color: rgb(124, 81, 162);
+   background-color: rgb(131, 70, 169);
 }
 
 .yellow {
-   background-color: rgb(221, 207, 58);
+   background-color: rgb(226, 214, 0);
 }
 
 .red {
-   background-color: rgb(208, 84, 65);
+   background-color: rgb(227, 73, 50);
+}
+
+
+.blue-trans {
+   background-color: rgba(118,172,255,0.8);
+}
+
+.green-trans {
+   background-color: rgba(128,230,121,0.8);
+}
+
+.purple-trans {
+   background-color: rgba(131, 70, 169,0.8);
+}
+
+.yellow-trans {
+   background-color: rgba(226, 214, 0,0.8);
+}
+
+.red-trans {
+   background-color: rgba(227, 73, 50, 0.8);
 }
 
 .marq {
@@ -108,7 +129,6 @@
 
 .notice-square {
    padding: 20px;
-   background-color: #f9f9f9;
    height: 250px;
    padding-top: 100px;
 }
@@ -127,10 +147,6 @@ a.start-new-game {
    border-radius: 10px;
 }
 
-.expander {
-
-}
-
 @-webkit-keyframes expander {
   0% {
      -webkit-transform: scale3d(1.0,1.0,0);
@@ -143,88 +159,9 @@ a.start-new-game {
 }
 
 .levelish {
-   -webkit-animation-duration: 0.2s;
+   -webkit-animation-duration: 0.3s;
    -webkit-animation-iteration-count: 1;
-}
-
-.level-0 {
-   -webkit-animation-name: bounce-0;
-}
-
-.level-1 {
-   -webkit-animation-name: bounce-1;
-}
-
-.level-2 {
-   -webkit-animation-name: bounce-2;
-}
-
-.level-3 {
-   -webkit-animation-name: bounce-3;
-}
-
-.level-4 {
-   -webkit-animation-name: bounce-4;
-}
-
-.level-5 {
-   -webkit-animation-name: bounce-5;
-}
-
-@-webkit-keyframes bounce-0 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  100% {
-     -webkit-transform: translate3d(0,360px,0);
-  }
-}
-
-@-webkit-keyframes bounce-1 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  100% {
-     -webkit-transform: translate3d(0,405px,0);
-  }
-}
-
-@-webkit-keyframes bounce-2 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  100% {
-     -webkit-transform: translate3d(0,450px,0);
-  }
-}
-
-
-@-webkit-keyframes bounce-3 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  100% {
-     -webkit-transform: translate3d(0,495px,0);
-  }
-}
-
-
-@-webkit-keyframes bounce-4 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  100% {
-     -webkit-transform: translate3d(0,540px,0);
-  }
-}
-
-@-webkit-keyframes bounce-5 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  100% {
-     -webkit-transform: translate3d(0,585px,0);
-  }
+   -webkit-backface-visibility: hidden;
 }
 
 @media (max-width: 480px){
