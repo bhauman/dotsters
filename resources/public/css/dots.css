@@ -51,12 +51,12 @@
    height: 20px;
    border-radius: 10px;
    background-color: rgb(131,176,249);
-   -webkit-transition: all 0.2s; 
+/*   -webkit-transition: all 0.2s; 
    -webkit-transform: translate3d(0,0,0);
    -moz-transition: all 0.2s; 
    -moz-transform: translate3d(0,0,0);
    transition: all 0.2s; 
-   transform: translate3d(0,0,0);
+   transform: translate3d(0,0,0); */
 }
 
 .dot-highlight {
@@ -143,8 +143,9 @@ a.start-new-game {
 }
 
 .levelish {
-   -webkit-animation-duration: 0.4s;
+   -webkit-animation-duration: 0.45s;
    -webkit-animation-iteration-count: 1;
+   -webkit-backface-visibility: hidden;
 }
 
 .level-0 {
@@ -177,96 +178,65 @@ a.start-new-game {
    -webkit-animation-name: bounce-5;
 }
 
-@-webkit-keyframes bounce-0 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  60% {
-     -webkit-transform: translate3d(0,360px,0);
-  }   
-  90% {
-     -webkit-transform: translate3d(0,345px,0); /* - 10 */
-  }
-  100% {
-     -webkit-transform: translate3d(0,360px,0);
-  }
+@-webkit-keyframes bounce-0{
+0% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
+53% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
+
+71% { -webkit-transform: translate3d(0,360px,0); -webkit-animation-timing: ease-out;}
+81% { -webkit-transform: translate3d(0,348px,0); -webkit-animation-timing: ease-in;}
+89% { -webkit-transform: translate3d(0,360px,0); -webkit-animation-timing: ease-out;}
+95% { -webkit-transform: translate3d(0,357px,0); -webkit-animation-timing: ease-in;}
+100% { -webkit-transform: translate3d(0,360px,0); -webkit-animation-timing: ease-out;}
 }
+ @-webkit-keyframes bounce-1{
+0% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
+53% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
 
-@-webkit-keyframes bounce-1 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  60% {
-     -webkit-transform: translate3d(0,405px,0);
-  }   
-  90% {
-     -webkit-transform: translate3d(0,390px,0); /* - 10 */
-  }
-  100% {
-     -webkit-transform: translate3d(0,405px,0);
-  }
+71% { -webkit-transform: translate3d(0,405px,0); -webkit-animation-timing: ease-out;}
+80% { -webkit-transform: translate3d(0,390px,0); -webkit-animation-timing: ease-in;}
+89% { -webkit-transform: translate3d(0,405px,0); -webkit-animation-timing: ease-out;}
+95% { -webkit-transform: translate3d(0,401px,0); -webkit-animation-timing: ease-in;}
+100% { -webkit-transform: translate3d(0,405px,0); -webkit-animation-timing: ease-out;}
 }
+ @-webkit-keyframes bounce-2{
+0% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
+53% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
 
-@-webkit-keyframes bounce-2 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  60% {
-     -webkit-transform: translate3d(0,450px,0);
-  }   
-  90% {
-     -webkit-transform: translate3d(0,435px,0); /* - 10 */
-  }
-  100% {
-     -webkit-transform: translate3d(0,450px,0);
-  }
+71% { -webkit-transform: translate3d(0,450px,0); -webkit-animation-timing: ease-out;}
+81% { -webkit-transform: translate3d(0,433px,0); -webkit-animation-timing: ease-in;}
+89% { -webkit-transform: translate3d(0,450px,0); -webkit-animation-timing: ease-out;}
+94% { -webkit-transform: translate3d(0,445px,0); -webkit-animation-timing: ease-in;}
+100% { -webkit-transform: translate3d(0,450px,0); -webkit-animation-timing: ease-out;}
 }
+ @-webkit-keyframes bounce-3{
+0% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
+53% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
 
-
-@-webkit-keyframes bounce-3 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  60% {
-     -webkit-transform: translate3d(0,495px,0);
-  }   
-  90% {
-     -webkit-transform: translate3d(0,480px,0); /* - 10 */
-  }
-  100% {
-     -webkit-transform: translate3d(0,495px,0);
-  }
+71% { -webkit-transform: translate3d(0,495px,0); -webkit-animation-timing: ease-out;}
+81% { -webkit-transform: translate3d(0,475px,0); -webkit-animation-timing: ease-in;}
+89% { -webkit-transform: translate3d(0,495px,0); -webkit-animation-timing: ease-out;}
+95% { -webkit-transform: translate3d(0,490px,0); -webkit-animation-timing: ease-in;}
+100% { -webkit-transform: translate3d(0,495px,0); -webkit-animation-timing: ease-out;}
 }
+ @-webkit-keyframes bounce-4{
+0% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
+53% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
 
-
-@-webkit-keyframes bounce-4 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  60% {
-     -webkit-transform: translate3d(0,540px,0);
-  }   
-  90% {
-     -webkit-transform: translate3d(0,525px,0); /* - 10 */
-  }
-  100% {
-     -webkit-transform: translate3d(0,540px,0);
-  }
+71% { -webkit-transform: translate3d(0,540px,0); -webkit-animation-timing: ease-out;}
+81% { -webkit-transform: translate3d(0,517px,0); -webkit-animation-timing: ease-in;}
+89% { -webkit-transform: translate3d(0,540px,0); -webkit-animation-timing: ease-out;}
+94% { -webkit-transform: translate3d(0,534px,0); -webkit-animation-timing: ease-in;}
+100% { -webkit-transform: translate3d(0,540px,0); -webkit-animation-timing: ease-out;}
 }
+ @-webkit-keyframes bounce-5{
+0% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
+53% { -webkit-transform: translate3d(0,180px,0); -webkit-animation-timing: ease-in;}
 
-@-webkit-keyframes bounce-5 {
-  0% {
-     -webkit-transform: translate3d(0,0,0);
-  }
-  60% {
-     -webkit-transform: translate3d(0,585px,0);
-  }   
-  90% {
-     -webkit-transform: translate3d(0,570px,0); /* - 10 */
-  }
-  100% {
-     -webkit-transform: translate3d(0,585px,0);
-  }   
+71% { -webkit-transform: translate3d(0,585px,0); -webkit-animation-timing: ease-out;}
+80% { -webkit-transform: translate3d(0,559px,0); -webkit-animation-timing: ease-in;}
+89% { -webkit-transform: translate3d(0,585px,0); -webkit-animation-timing: ease-out;}
+94% { -webkit-transform: translate3d(0,578px,0); -webkit-animation-timing: ease-in;}
+100% { -webkit-transform: translate3d(0,585px,0); -webkit-animation-timing: ease-out;}
 }
 
 @media (max-width: 480px){
