@@ -67,7 +67,7 @@
     out-chan))
 
 (def peice-colors [:blue :green :yellow :purple :red])
-(def offscreen-dot-position 13)
+(def offscreen-dot-position 8)
 (def board-size 6)
 (def number-colors (count peice-colors))
 (def grid-unit-size 45)
