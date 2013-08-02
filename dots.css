@@ -1,0 +1,48 @@
+.dots-game {
+   position: relative;
+}
+
+.board {
+  position: relative;
+  height: 800px;
+}
+
+.chain-line {
+  possition: absolute;
+}
+
+.chain-line .line {
+   background-color: rgb(131,176,249);
+   width: 3px;
+   height: 50px;
+}
+
+.dot {
+   position: absolute;
+   width: 20px;
+   height: 20px;
+   border-radius: 10px;
+   background-color: rgb(131,176,249);
+   /* transition: all 1.0s; */
+   /* -webkit-transform: translate3d(0,0,0); */
+}
+
+.dot.blue {
+   background-color: rgb(131,176,249);
+}
+
+.dot.green {
+   background-color: rgb(147,221,135);
+}
+
+.dot.purple {
+   background-color: rgb(124, 81, 162);
+}
+
+.dot.yellow {
+   background-color: rgb(221, 207, 58);
+}
+
+.dot.red {
+   background-color: rgb(208, 84, 65);
+}

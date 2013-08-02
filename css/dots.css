@@ -1,0 +1,172 @@
+
+.dots-game {
+   width: 320px;
+   position: relative;
+}
+
+.header {
+  width: 320px;
+}
+
+.heads {
+   background-color: rgb(131, 70, 169);
+   /* background-color: #eee; */
+   display: inline-block;
+   width: 160px;
+   height: 30px;
+   padding-top: 13px;
+   text-align: center;
+   color: rgba(255,255,255, 0.5);;
+   font-family: helvetica;
+}
+
+.time-val, .score-val {
+ color: white;
+}
+
+.board-area {
+   padding-left: 13px;
+   padding-top: 13px;
+}
+
+.board {
+  position: relative;
+  height: 320px;
+}
+
+.chain-line, .dot-highlights {
+   position: relative;
+}
+
+.chain-line .line { 
+   position: absolute;
+   -webkit-transform: translate3d(0,0,0);
+   -moz-transform: translate3d(0,0,0);
+   transform: translate3d(0,0,0);
+}
+
+.dot {
+   position: absolute;
+   width: 20px;
+   height: 20px;
+   border-radius: 10px;
+   background-color: rgb(131,176,249);
+   /* -webkit-transition: all 0.2s; 
+   -webkit-transform: translate3d(0,0,0);
+   -moz-transition: all 0.2s; 
+   -moz-transform: translate3d(0,0,0);
+   transition: all 0.2s; 
+   transform: translate3d(0,0,0); */
+}
+
+.dot-highlight {
+   position: absolute;
+   width: 20px;
+   height: 20px;
+   opacity: 0.0;
+   border-radius: 10px;
+   -webkit-animation-name: expander;
+   -webkit-animation-duration: 0.7s;
+   -webkit-animation-iteration-count: 1;
+   -webkit-transform: translate3d(0,0,0) scale3d(2.8,2.8,0);
+}
+
+.blue {
+   background-color: rgb(118,172,255);
+}
+
+.green {
+   background-color: rgb(128,230,121);
+}
+
+.purple {
+   background-color: rgb(131, 70, 169);
+}
+
+.yellow {
+   background-color: rgb(226, 214, 0);
+}
+
+.red {
+   background-color: rgb(227, 73, 50);
+}
+
+
+.blue-trans {
+   background-color: rgba(118,172,255,0.8);
+}
+
+.green-trans {
+   background-color: rgba(128,230,121,0.8);
+}
+
+.purple-trans {
+   background-color: rgba(131, 70, 169,0.8);
+}
+
+.yellow-trans {
+   background-color: rgba(226, 214, 0,0.8);
+}
+
+.red-trans {
+   background-color: rgba(227, 73, 50, 0.8);
+}
+
+.marq {
+   text-align:center;
+   color: #fff;
+   font-family: helvetica;
+}
+
+.marq span {
+   display: inline-block;
+   border-radius: 10px;
+   padding: 6px;
+   margin: 1px;
+   width: 17px;
+   height: 17px;
+}
+
+.notice-square {
+   padding: 20px;
+   height: 250px;
+   padding-top: 100px;
+}
+
+.control-area {
+   text-align: center;
+   font-family: helvetica;
+   margin-top: 70px;
+}
+
+a.start-new-game {
+   text-decoration: none;
+   background-color: rgb(131,176,249);
+   color: #fff;
+   padding: 10px;
+   border-radius: 10px;
+}
+
+@-webkit-keyframes expander {
+  0% {
+     -webkit-transform: scale3d(1.0,1.0,0);
+     opacity: 0.8;
+  }
+  100% {
+     -webkit-transform: scale3d(2.8,2.8,0);
+     opacity: 0.0;
+  }
+}
+
+.levelish {
+   -webkit-animation-duration: 0.3s;
+   -webkit-animation-iteration-count: 1;
+   -webkit-backface-visibility: hidden;
+}
+
+@media (max-width: 480px){
+   body {
+      margin: 0px;
+   }
+}
+
