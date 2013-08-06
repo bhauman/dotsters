@@ -2,6 +2,11 @@
 .dots-game {
    width: 320px;
    position: relative;
+  -webkit-touch-callout: none; 
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: moz-none;
+  -ms-user-select: none; 
 }
 
 .header {
@@ -30,6 +35,7 @@
 }
 
 .board {
+  user-select: none;
   position: relative;
   height: 320px;
 }
