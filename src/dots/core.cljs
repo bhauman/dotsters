@@ -165,14 +165,14 @@
 
 (defn render-view [state]
   (let [view-dom (crate/html (board state))]
-      (inner ($ ".dots-game.container") view-dom)
+      (inner ($ ".dots-game-container") view-dom)
       (mapv add-dots-to-board (state :board))))
 
 (defn dot-index [offset {:keys [x y]}]
   (let [[x y] (map - [x y] offset [12 12])]
     (let [ypos (reverse-board-position (int (/ y grid-unit-size)))
           xpos (int (/ x grid-unit-size))]
-      (if (and (> board-size ypos) (> board-size xpos))
+      (if (and (> board-size ypos -1) (> board-size xpos -1))
         [xpos ypos]))))
 
 (defn dot-color [{:keys [board]} dot-pos]
@@ -207,6 +207,7 @@
         dot-chain      (:dot-chain state)
         last-chain-length (count last-dot-chain)
         chain-length      (count dot-chain)]
+    (log (prn-str dot-chain))
     (when (and (not= last-chain-length chain-length) (pos? chain-length))
       (let [color (dot-color state (first dot-chain))
             length-diff            (- chain-length last-chain-length)]

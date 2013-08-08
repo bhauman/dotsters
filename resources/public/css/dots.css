@@ -9,11 +9,11 @@
   -ms-user-select: none; 
 }
 
-.header {
+.dots-game .header {
   width: 320px;
 }
 
-.heads {
+.dots-game .heads {
    background-color: rgb(131, 70, 169);
    /* background-color: #eee; */
    display: inline-block;
@@ -29,34 +29,34 @@
  color: white;
 }
 
-.board-area {
+.dots-game .board-area {
    padding-left: 13px;
    padding-top: 13px;
 }
 
-.board {
+.dots-game .board {
   user-select: none;
   position: relative;
   height: 320px;
 }
 
-.chain-line, .dot-highlights {
+.dots-game .chain-line, 
+.dots-game .dot-highlights {
    position: relative;
 }
 
-.chain-line .line { 
+.dots-game .chain-line .line { 
    position: absolute;
    -webkit-transform: translate3d(0,0,0);
    -moz-transform: translate3d(0,0,0);
    transform: translate3d(0,0,0);
 }
 
-.dot {
+.dots-game .dot {
    position: absolute;
    width: 20px;
    height: 20px;
    border-radius: 10px;
-   background-color: rgb(131,176,249);
    /* -webkit-transition: all 0.2s; 
    -webkit-transform: translate3d(0,0,0);
    -moz-transition: all 0.2s; 
@@ -65,7 +65,7 @@
    transform: translate3d(0,0,0); */
 }
 
-.dot-highlight {
+.dots-game .dot-highlight {
    position: absolute;
    width: 20px;
    height: 20px;
@@ -118,13 +118,13 @@
    background-color: rgba(227, 73, 50, 0.8);
 }
 
-.marq {
+.dots-game .marq {
    text-align:center;
    color: #fff;
    font-family: helvetica;
 }
 
-.marq span {
+.dots-game .marq span {
    display: inline-block;
    border-radius: 10px;
    padding: 6px;
@@ -133,19 +133,19 @@
    height: 17px;
 }
 
-.notice-square {
+.dots-game .notice-square {
    padding: 20px;
    height: 250px;
    padding-top: 100px;
 }
 
-.control-area {
+.dots-game .control-area {
    text-align: center;
    font-family: helvetica;
    margin-top: 70px;
 }
 
-a.start-new-game {
+.dots-game a.start-new-game {
    text-decoration: none;
    background-color: rgb(131,176,249);
    color: #fff;
@@ -164,7 +164,7 @@ a.start-new-game {
   }
 }
 
-.levelish {
+.dots-game .levelish {
    -webkit-animation-duration: 0.3s;
    -webkit-animation-iteration-count: 1;
    -webkit-backface-visibility: hidden;
@@ -175,4 +175,3 @@ a.start-new-game {
       margin: 0px;
    }
 }
-
