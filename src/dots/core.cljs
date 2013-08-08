@@ -161,11 +161,11 @@
 
 (defn add-dots-to-board [dots]
   (doseq [{:keys [elem]} dots]
-    (append ($ ".board") elem)))
+    (append ($ ".dots-game .board") elem)))
 
 (defn render-view [state]
   (let [view-dom (crate/html (board state))]
-      (inner ($ ".container") view-dom)
+      (inner ($ ".dots-game.container") view-dom)
       (mapv add-dots-to-board (state :board))))
 
 (defn dot-index [offset {:keys [x y]}]
@@ -252,10 +252,10 @@
 (defn flash-class [color] (str (name color) "-trans"))
 
 (defn flash-color-on [color]
-  (.addClass ($ ".board-area") (flash-class color)))
+  (.addClass ($ ".dots-game .board-area") (flash-class color)))
 
 (defn flash-color-off [color]
-  (.removeClass ($ ".board-area") (flash-class color)))
+  (.removeClass ($ ".dots-game .board-area") (flash-class color)))
 
 (defn get-dots-to-remove [draw-ch start-state]
   (go
@@ -344,7 +344,7 @@
 (defn setup-game-state []
   (let [init-state {:board (create-board)}]
     (render-view init-state)
-    (let [board-offset ((juxt :left :top) (offset ($ ".board")))]
+    (let [board-offset ((juxt :left :top) (offset ($ ".dots-game .board")))]
       (assoc init-state :dot-index
              (partial dot-index board-offset)
              :dot-chain [] :score 0))))
@@ -372,11 +372,11 @@
 
 (defn render-screen [screen]
   (let [view-dom (crate/html screen)]
-    (inner ($ ".container") view-dom)))
+    (inner ($ ".dots-game-container") view-dom)))
 
 (defn app-loop []
   (let [draw-ch (draw-chan "body")
-        start-chan (click-chan ".start-new-game" :start-new-game)]
+        start-chan (click-chan ".dots-game .start-new-game" :start-new-game)]
     (go
      (render-screen (start-screen))
      (<! (select-chan #(= [:start-new-game] %) [start-chan draw-ch]))
