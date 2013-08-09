@@ -57,6 +57,8 @@
    width: 20px;
    height: 20px;
    border-radius: 10px;
+   -ms-transition: all 0.2s;
+   -moz-transition: all 0.2s;
    /* -webkit-transition: all 0.2s; 
    -webkit-transform: translate3d(0,0,0);
    -moz-transition: all 0.2s; 
@@ -75,6 +77,10 @@
    -webkit-animation-duration: 0.7s;
    -webkit-animation-iteration-count: 1;
    -webkit-transform: translate3d(0,0,0) scale3d(2.8,2.8,0);
+   -moz-animation-name: expander-moz;
+   -moz-animation-duration: 0.7s;
+   -moz-animation-iteration-count: 1;
+   -moz-transform: scale(2.8,2.8);
 }
 
 .blue {
@@ -160,6 +166,17 @@
   }
   100% {
      -webkit-transform: scale3d(2.8,2.8,0);
+     opacity: 0.0;
+  }
+}
+
+@-moz-keyframes expander-moz {
+  0% {
+     -moz-transform: scale(1.0,1.0);
+     opacity: 0.8;
+  }
+  100% {
+     -moz-transform: scale(2.8,2.8);
      opacity: 0.0;
   }
 }
