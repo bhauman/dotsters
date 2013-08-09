@@ -30,7 +30,9 @@
             (interleave (map (fn [[p c]] [p end-y]) lows) highs)
             [[100 end-y]])))
 
-(defn translate-y [ycoord] (str "-webkit-transform: translate3d(0," ycoord "px,0);"))
+(defn translate-y [ycoord] (str "-webkit-transform: translate3d(0," ycoord "px,0);"
+                                "-moz-transform: translate(0," ycoord "px);"
+                                "-ms-transform: translate(0," ycoord "px);"))
 
 (defn frame [index [perc coord]]
   (str perc "% { "
@@ -45,6 +47,8 @@
 (defn anim-template [level-name start-y end-y]
   (str
    "." level-name " {\n"
+   "-ms-transform: translate(0," end-y "px);\n"      
+   "-moz-transform: translate(0," end-y "px);\n"   
    "-webkit-transform: translate3d(0," end-y "px,0);\n"
    "-webkit-animation-name: " level-name ";\n"
    "}\n"
