@@ -142,7 +142,11 @@
          trans (translate-top top)]
      (css $elem {"-webkit-transition" "all 0.2s"})
      (css $elem {"-webkit-transform"
-                 (str trans " scale3d(0.1,0.1,0.1)")})
+                 (str trans " scale3d(0.1,0.1,0.1)")
+                 "-moz-transform"
+                 (str "translate(0," (+ offscreen-offset top) "px) scale(0.1,0.1)")
+                 "-ms-transform"
+                 (str "translate(0," (+ offscreen-offset top) "px) scale(0.1,0.1)")})
      (<! (timeout 150))
      (.remove ($ elem)))))
 
@@ -207,7 +211,6 @@
         dot-chain      (:dot-chain state)
         last-chain-length (count last-dot-chain)
         chain-length      (count dot-chain)]
-    (log (prn-str dot-chain))
     (when (and (not= last-chain-length chain-length) (pos? chain-length))
       (let [color (dot-color state (first dot-chain))
             length-diff            (- chain-length last-chain-length)]
@@ -315,7 +318,6 @@
      (when (not (nil? dot))
        (when (not (at-correct-postion? dot [col-idx pos]))
          (<! (timeout 80))
-         (log "updating dot " (prn-str [col-idx pos]))
          (update-dot dot [col-idx pos]))
        (recur xd (inc pos))))))
 
