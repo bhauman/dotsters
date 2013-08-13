@@ -64,17 +64,22 @@
           (recur (<! input-chan))))
     out-chan))
 
-(def peice-colors [:blue :green :yellow :purple :red])
+(def dot-colors [:blue :green :yellow :purple :red])  
 (def offscreen-dot-position 8)
 (def board-size 6)
-(def number-colors (count peice-colors))
+(def number-colors (count dot-colors))
 (def grid-unit-size 45)
 (def dot-size 20)
 (def corner-offset (- grid-unit-size dot-size))
 
-(defn rand-colors []
-  (map #(get peice-colors (rand-int %))
-   (repeat number-colors)))
+(defn rand-colors [exclude-color]
+  (log "getting colors" (prn-str exclude-color))
+  (let [colors (if exclude-color (vec (remove (partial = exclude-color) dot-colors))
+                   dot-colors)
+        number-colors (if exclude-color (dec number-colors) number-colors)]
+    (log "getting colors" (prn-str colors))
+    (map #(get colors (rand-int %))
+         (repeat number-colors))))
 
 (def reverse-board-position (partial - (dec board-size)))
 (def pos->coord #(+ corner-offset (* grid-unit-size %)))
@@ -272,7 +277,7 @@
          (<! (select-chan (fn [[msg _]] (= msg :drawend)) [draw-ch]))
          (flash-color-off color)
          (erase-dot-chain)
-         (assoc state :dot-chain (dot-positions-for-focused-color state)))
+         (assoc state :dot-chain (dot-positions-for-focused-color state) :exclude-color color))
        (let [[msg point] (<! draw-ch)]
          (if (= msg :drawend)
            (do (erase-dot-chain) state)
@@ -295,22 +300,23 @@
                                 (state :board))]
     (assoc state :board (vec next_board))))
 
-(defn add-missing-dots-helper [col-idx col]
+(defn add-missing-dots-helper [col-idx col exclude-color]
   (if (= (count col) board-size)
     col
     (let [new-dots (map create-dot
                         (repeat col-idx)
                         (repeat offscreen-dot-position)
-                        (take (- board-size (count col)) (rand-colors)))]
+                        (take (- board-size (count col)) (rand-colors exclude-color)))]
       (add-dots-to-board new-dots)
       (vec (concat col new-dots)))))
 
-(defn add-missing-dots [{:keys [board] :as state}]
+(defn add-missing-dots [{:keys [board exclude-color] :as state}]
     (assoc state :board
            (vec
             (map-indexed
-             #(add-missing-dots-helper %1 %2)
-             board))))
+             #(add-missing-dots-helper %1 %2 exclude-color)
+             board))
+           :exclude-color nil))
 
 (defn render-position-updates-helper [col-idx col]
   (go
@@ -365,11 +371,12 @@
            (if (= ch game-over-ch)
              state ;; leave game loop
              (recur
-              (let [{:keys [dot-chain]} value]
+              (let [{:keys [dot-chain exclude-color]} value]
                 (if (< 1 (count dot-chain))
                   (-> state
                       (render-remove-dots dot-chain)
-                      (assoc :score (+ (state :score) (count (set dot-chain)))))
+                      (assoc :score (+ (state :score) (count (set dot-chain)))
+                             :exclude-color exclude-color))
                   state)
                 )))))))))
 
