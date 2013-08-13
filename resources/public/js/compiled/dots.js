@@ -18423,62 +18423,51 @@ var dots = {core:{}};
 dots.core.select_chan = function(a, b) {
   var c = cljs.core.async.chan.call(null, 1);
   cljs.core.async.impl.dispatch.run.call(null, function() {
-    var d = null, e = function() {
+    var d = function(c) {
+      var d = c[1];
+      if(7 === d) {
+        return d = c, d[2] = c[2], d[1] = 3, "\ufdd0:recur"
+      }
+      if(6 === d) {
+        return c[2] = null, c[1] = 2, "\ufdd0:recur"
+      }
+      if(5 === d) {
+        return d = c[5], c[2] = d, c[1] = 7, "\ufdd0:recur"
+      }
+      if(4 === d) {
+        var e = c[2], d = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), f = a.call(null, d);
+        c[6] = e;
+        c[5] = d;
+        c[1] = cljs.core.truth_(f) ? 5 : 6;
+        return"\ufdd0:recur"
+      }
+      return 3 === d ? (d = c[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)) : 2 === d ? cljs.core.async.impl.ioc_helpers.ioc_alts_BANG_.call(null, c, 4, b) : 1 === d ? (c[2] = null, c[1] = 2, "\ufdd0:recur") : null
+    }, e = null, f = function() {
       var a = Array(7);
-      a[0] = d;
+      a[0] = e;
       a[1] = 1;
       return a
-    }, f = function(c) {
+    }, g = function(a) {
       for(;;) {
-        var d = function() {
-          var d = c[1] | 0;
-          if(cljs.core._EQ_.call(null, 1, d)) {
-            return d = c, d[2] = null, d[1] = 2, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 2, d)) {
-            return d = c, cljs.core.async.impl.ioc_helpers.ioc_alts_BANG_.call(null, d, 4, b)
-          }
-          if(cljs.core._EQ_.call(null, 3, d)) {
-            var e = c[2], d = c;
-            return cljs.core.async.impl.ioc_helpers.return_chan.call(null, d, e)
-          }
-          if(cljs.core._EQ_.call(null, 4, d)) {
-            var e = c[5], e = c[2], d = cljs.core.nth.call(null, e, 0, null), f = cljs.core.nth.call(null, e, 1, null), e = a.call(null, d);
-            c[5] = d;
-            c[6] = f;
-            d = c;
-            d[1] = cljs.core.truth_(e) ? 5 : 6;
-            return"\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 5, d)) {
-            return e = c[5], d = c, d[2] = e, d[1] = 7, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 6, d)) {
-            return d = c, d[2] = null, d[1] = 2, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 7, d)) {
-            return e = c[2], d = c, d[2] = e, d[1] = 3, "\ufdd0:recur"
-          }
-          throw Error([cljs.core.str("No matching clause: "), cljs.core.str(c[1] | 0)].join(""));
-        }();
-        if("\ufdd0:recur" !== d) {
-          return d
+        var b = d.call(null, a);
+        if("\ufdd0:recur" !== b) {
+          return b
         }
       }
-    }, d = function(a) {
+    }, e = function(a) {
       switch(arguments.length) {
         case 0:
-          return e.call(this);
+          return f.call(this);
         case 1:
-          return f.call(this, a)
+          return g.call(this, a)
       }
       throw Error("Invalid arity: " + arguments.length);
     };
-    d.cljs$core$IFn$_invoke$arity$0 = e;
-    d.cljs$core$IFn$_invoke$arity$1 = f;
-    var g = d.call(null);
-    g[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
-    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, g)
+    e.cljs$core$IFn$_invoke$arity$0 = f;
+    e.cljs$core$IFn$_invoke$arity$1 = g;
+    var h = e.call(null);
+    h[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
+    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, h)
   });
   return c
 };
@@ -18518,64 +18507,43 @@ dots.core.drawer_chan = function(a, b) {
 dots.core.get_drawing = function(a, b) {
   var c = cljs.core.async.chan.call(null, 1);
   cljs.core.async.impl.dispatch.run.call(null, function() {
-    var d = null, e = function() {
+    var d = function(c) {
+      var d = c[1];
+      if(8 === d) {
+        var e = c[2];
+        c[5] = e;
+        c[2] = null;
+        c[1] = 3;
+        return"\ufdd0:recur"
+      }
+      return 7 === d ? (d = c[2], c[2] = d, c[1] = 4, "\ufdd0:recur") : 6 === d ? (c[2] = null, c[1] = 7, "\ufdd0:recur") : 5 === d ? cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, c, 8, a) : 4 === d ? (d = c[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)) : 3 === d ? (e = c[5], d = cljs.core.async.put_BANG_.call(null, b, e), e = cljs.core.first.call(null, e), e = cljs.core._EQ_.call(null, e, "\ufdd0:draw"), c[6] = d, c[1] = e ? 5 : 6, "\ufdd0:recur") : 2 === d ? (e = c[2], 
+      c[5] = e, c[2] = null, c[1] = 3, "\ufdd0:recur") : 1 === d ? cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, c, 2, a) : null
+    }, e = null, f = function() {
       var a = Array(7);
-      a[0] = d;
+      a[0] = e;
       a[1] = 1;
       return a
-    }, f = function(c) {
+    }, g = function(a) {
       for(;;) {
-        var d = function() {
-          var d = c[1] | 0;
-          if(cljs.core._EQ_.call(null, 1, d)) {
-            return d = c, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 2, a)
-          }
-          if(cljs.core._EQ_.call(null, 2, d)) {
-            var e = c[2];
-            c[5] = e;
-            d = c;
-            d[2] = null;
-            d[1] = 3;
-            return"\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 3, d)) {
-            return e = c[5], d = cljs.core.async.put_BANG_.call(null, b, e), e = cljs.core.first.call(null, e), e = cljs.core._EQ_.call(null, e, "\ufdd0:draw"), c[6] = d, d = c, d[1] = e ? 5 : 6, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 4, d)) {
-            return e = c[2], d = c, cljs.core.async.impl.ioc_helpers.return_chan.call(null, d, e)
-          }
-          if(cljs.core._EQ_.call(null, 5, d)) {
-            return d = c, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 8, a)
-          }
-          if(cljs.core._EQ_.call(null, 6, d)) {
-            return d = c, d[2] = null, d[1] = 7, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 7, d)) {
-            return e = c[2], d = c, d[2] = e, d[1] = 4, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 8, d)) {
-            return e = c[2], c[5] = e, d = c, d[2] = null, d[1] = 3, "\ufdd0:recur"
-          }
-          throw Error([cljs.core.str("No matching clause: "), cljs.core.str(c[1] | 0)].join(""));
-        }();
-        if("\ufdd0:recur" !== d) {
-          return d
+        var b = d.call(null, a);
+        if("\ufdd0:recur" !== b) {
+          return b
         }
       }
-    }, d = function(a) {
+    }, e = function(a) {
       switch(arguments.length) {
         case 0:
-          return e.call(this);
+          return f.call(this);
         case 1:
-          return f.call(this, a)
+          return g.call(this, a)
       }
       throw Error("Invalid arity: " + arguments.length);
     };
-    d.cljs$core$IFn$_invoke$arity$0 = e;
-    d.cljs$core$IFn$_invoke$arity$1 = f;
-    var g = d.call(null);
-    g[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
-    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, g)
+    e.cljs$core$IFn$_invoke$arity$0 = f;
+    e.cljs$core$IFn$_invoke$arity$1 = g;
+    var h = e.call(null);
+    h[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
+    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, h)
   });
   return c
 };
@@ -18586,83 +18554,86 @@ dots.core.draw_chan = function(a) {
   dots.core.drawer_chan.call(null, b, a);
   var d = cljs.core.async.chan.call(null, 1);
   cljs.core.async.impl.dispatch.run.call(null, function() {
-    var a = null, f = function() {
-      var b = Array(11);
-      b[0] = a;
-      b[1] = 1;
-      return b
-    }, g = function(a) {
+    var a = function(a) {
+      var d = a[1];
+      if(9 === d) {
+        var e = a[2];
+        a[5] = e;
+        a[2] = null;
+        a[1] = 3;
+        return"\ufdd0:recur"
+      }
+      if(8 === d) {
+        return d = a[2], a[2] = d, a[1] = 7, "\ufdd0:recur"
+      }
+      if(7 === d) {
+        return a[6] = a[2], cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, a, 9, b)
+      }
+      if(6 === d) {
+        return a[2] = null, a[1] = 7, "\ufdd0:recur"
+      }
+      if(5 === d) {
+        return e = a[5], d = cljs.core.async.put_BANG_.call(null, c, e), e = dots.core.get_drawing.call(null, b, c), a[7] = d, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, a, 8, e)
+      }
+      if(4 === d) {
+        return d = a[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, a, d)
+      }
+      if(3 === d) {
+        return e = a[5], d = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), d = cljs.core._EQ_.call(null, d, "\ufdd0:drawstart"), a[8] = e, a[1] = d ? 5 : 6, "\ufdd0:recur"
+      }
+      if(2 === d) {
+        var d = a[2], e = cljs.core.nth.call(null, d, 0, null), f = cljs.core.nth.call(null, d, 1, null);
+        a[5] = d;
+        a[9] = e;
+        a[10] = f;
+        a[2] = null;
+        a[1] = 3;
+        return"\ufdd0:recur"
+      }
+      return 1 === d ? cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, a, 2, b) : null
+    }, f = null, g = function() {
+      var a = Array(11);
+      a[0] = f;
+      a[1] = 1;
+      return a
+    }, h = function(b) {
       for(;;) {
-        var d = function() {
-          var d = a[1] | 0;
-          if(cljs.core._EQ_.call(null, 1, d)) {
-            return d = a, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 2, b)
-          }
-          if(cljs.core._EQ_.call(null, 2, d)) {
-            var d = a[2], e = cljs.core.nth.call(null, d, 0, null), f = cljs.core.nth.call(null, d, 1, null);
-            a[9] = f;
-            a[10] = e;
-            a[5] = d;
-            d = a;
-            d[2] = null;
-            d[1] = 3;
-            return"\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 3, d)) {
-            return e = a[5], d = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), f = cljs.core._EQ_.call(null, d, "\ufdd0:drawstart"), a[8] = e, d = a, d[1] = f ? 5 : 6, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 4, d)) {
-            return e = a[2], d = a, cljs.core.async.impl.ioc_helpers.return_chan.call(null, d, e)
-          }
-          if(cljs.core._EQ_.call(null, 5, d)) {
-            return e = a[5], d = cljs.core.async.put_BANG_.call(null, c, e), e = dots.core.get_drawing.call(null, b, c), a[7] = d, d = a, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 8, e)
-          }
-          if(cljs.core._EQ_.call(null, 6, d)) {
-            return d = a, d[2] = null, d[1] = 7, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 7, d)) {
-            return a[6] = a[2], d = a, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 9, b)
-          }
-          if(cljs.core._EQ_.call(null, 8, d)) {
-            return e = a[2], d = a, d[2] = e, d[1] = 7, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 9, d)) {
-            return e = a[2], a[5] = e, d = a, d[2] = null, d[1] = 3, "\ufdd0:recur"
-          }
-          throw Error([cljs.core.str("No matching clause: "), cljs.core.str(a[1] | 0)].join(""));
-        }();
-        if("\ufdd0:recur" !== d) {
-          return d
+        var c = a.call(null, b);
+        if("\ufdd0:recur" !== c) {
+          return c
         }
       }
-    }, a = function(a) {
+    }, f = function(a) {
       switch(arguments.length) {
         case 0:
-          return f.call(this);
+          return g.call(this);
         case 1:
-          return g.call(this, a)
+          return h.call(this, a)
       }
       throw Error("Invalid arity: " + arguments.length);
     };
-    a.cljs$core$IFn$_invoke$arity$0 = f;
-    a.cljs$core$IFn$_invoke$arity$1 = g;
-    var h = a.call(null);
-    h[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = d;
-    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, h)
+    f.cljs$core$IFn$_invoke$arity$0 = g;
+    f.cljs$core$IFn$_invoke$arity$1 = h;
+    var i = f.call(null);
+    i[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = d;
+    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, i)
   });
   return c
 };
-dots.core.peice_colors = cljs.core.PersistentVector.fromArray(["\ufdd0:blue", "\ufdd0:green", "\ufdd0:yellow", "\ufdd0:purple", "\ufdd0:red"], !0);
+dots.core.dot_colors = cljs.core.PersistentVector.fromArray(["\ufdd0:blue", "\ufdd0:green", "\ufdd0:yellow", "\ufdd0:purple", "\ufdd0:red"], !0);
 dots.core.offscreen_dot_position = 8;
 dots.core.board_size = 6;
-dots.core.number_colors = cljs.core.count.call(null, dots.core.peice_colors);
+dots.core.number_colors = cljs.core.count.call(null, dots.core.dot_colors);
 dots.core.grid_unit_size = 45;
 dots.core.dot_size = 20;
 dots.core.corner_offset = dots.core.grid_unit_size - dots.core.dot_size;
-dots.core.rand_colors = function() {
+dots.core.rand_colors = function(a) {
+  jayq.util.log.call(null, "getting colors", cljs.core.prn_str.call(null, a));
+  var b = cljs.core.truth_(a) ? cljs.core.vec.call(null, cljs.core.remove.call(null, cljs.core.partial.call(null, cljs.core._EQ_, a), dots.core.dot_colors)) : dots.core.dot_colors, a = cljs.core.truth_(a) ? dots.core.number_colors - 1 : dots.core.number_colors;
+  jayq.util.log.call(null, "getting colors", cljs.core.prn_str.call(null, b));
   return cljs.core.map.call(null, function(a) {
-    return cljs.core.get.call(null, dots.core.peice_colors, cljs.core.rand_int.call(null, a))
-  }, cljs.core.repeat.call(null, dots.core.number_colors))
+    return cljs.core.get.call(null, b, cljs.core.rand_int.call(null, a))
+  }, cljs.core.repeat.call(null, a))
 };
 dots.core.reverse_board_position = cljs.core.partial.call(null, cljs.core._, dots.core.board_size - 1);
 dots.core.pos__GT_coord = function(a) {
@@ -18718,49 +18689,47 @@ dots.core.translate_top = function(a) {
 dots.core.remove_dot = function(a) {
   var a = cljs.core.seq_QMARK_.call(null, a) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a, b = cljs.core.get.call(null, a, "\ufdd0:elem"), c = cljs.core.async.chan.call(null, 1);
   cljs.core.async.impl.dispatch.run.call(null, function() {
-    var a = null, e = function() {
-      var b = Array(8);
-      b[0] = a;
-      b[1] = 1;
-      return b
-    }, f = function(a) {
+    var a = function(a) {
+      var c = a[1];
+      if(2 === c) {
+        var c = a[2], d = jayq.core.$.call(null, b).remove();
+        a[5] = c;
+        return cljs.core.async.impl.ioc_helpers.return_chan.call(null, a, d)
+      }
+      if(1 === c) {
+        var c = jayq.core.$.call(null, b), d = dots.core.top_pos_from_dot_elem.call(null, c), d = dots.core.reverse_board_position.call(null, d), e = dots.core.pos__GT_coord.call(null, d), f = dots.core.translate_top.call(null, e), d = cljs.core.hash_map.call(null, "-webkit-transition", "all 0.2s"), d = jayq.core.css.call(null, c, d), f = [cljs.core.str(f), cljs.core.str(" scale3d(0.1,0.1,0.1)")].join(""), g = dots.core.offscreen_offset + e, g = [cljs.core.str("translate(0,"), cljs.core.str(g), cljs.core.str("px) scale(0.1,0.1)")].join(""), 
+        e = dots.core.offscreen_offset + e, e = [cljs.core.str("translate(0,"), cljs.core.str(e), cljs.core.str("px) scale(0.1,0.1)")].join(""), e = cljs.core.hash_map.call(null, "-webkit-transform", f, "-moz-transform", g, "-ms-transform", e), c = jayq.core.css.call(null, c, e), e = cljs.core.async.timeout.call(null, 150);
+        a[6] = d;
+        a[7] = c;
+        return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, a, 2, e)
+      }
+      return null
+    }, e = null, f = function() {
+      var a = Array(8);
+      a[0] = e;
+      a[1] = 1;
+      return a
+    }, g = function(b) {
       for(;;) {
-        var c;
-        c = a[1] | 0;
-        if(cljs.core._EQ_.call(null, 1, c)) {
-          c = jayq.core.$.call(null, b);
-          var d = dots.core.top_pos_from_dot_elem.call(null, c), d = dots.core.reverse_board_position.call(null, d), d = dots.core.pos__GT_coord.call(null, d), e = dots.core.translate_top.call(null, d), d = cljs.core.hash_map.call(null, "-webkit-transition", "all 0.2s"), d = jayq.core.css.call(null, c, d), e = [cljs.core.str(e), cljs.core.str(" scale3d(0.1,0.1,0.1)")].join(""), e = cljs.core.hash_map.call(null, "-webkit-transform", e), e = jayq.core.css.call(null, c, e), f = cljs.core.async.timeout.call(null, 
-          150);
-          c = void 0;
-          a[6] = d;
-          a[7] = e;
-          c = a;
-          c = cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, c, 2, f)
-        }else {
-          if(cljs.core._EQ_.call(null, 2, c)) {
-            c = a[2], d = jayq.core.$.call(null, b).remove(), a[5] = c, c = a, c = cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)
-          }else {
-            throw Error([cljs.core.str("No matching clause: "), cljs.core.str(a[1] | 0)].join(""));
-          }
-        }
+        var c = a.call(null, b);
         if("\ufdd0:recur" !== c) {
           return c
         }
       }
-    }, a = function(a) {
+    }, e = function(a) {
       switch(arguments.length) {
         case 0:
-          return e.call(this);
+          return f.call(this);
         case 1:
-          return f.call(this, a)
+          return g.call(this, a)
       }
       throw Error("Invalid arity: " + arguments.length);
     };
-    a.cljs$core$IFn$_invoke$arity$0 = e;
-    a.cljs$core$IFn$_invoke$arity$1 = f;
-    var g = a.call(null);
-    g[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
-    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, g)
+    e.cljs$core$IFn$_invoke$arity$0 = f;
+    e.cljs$core$IFn$_invoke$arity$1 = g;
+    var h = e.call(null);
+    h[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
+    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, h)
   });
   return c
 };
@@ -18773,53 +18742,39 @@ dots.core.update_dot = function(a, b) {
   if(cljs.core.truth_(a)) {
     var c = cljs.core.async.chan.call(null, 1);
     cljs.core.async.impl.dispatch.run.call(null, function() {
-      var d = null, e = function() {
+      var d = function(c) {
+        var d = c[1];
+        if(4 === d) {
+          var d = c[5], e = c[2], f = cljs.core.last.call(null, b), f = dots.core.reverse_board_position.call(null, f), e = [cljs.core.str("level-"), cljs.core.str(f), cljs.core.str(e)].join(""), d = d.addClass(e);
+          return cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)
+        }
+        return 3 === d ? (c[2] = "", c[1] = 4, "\ufdd0:recur") : 2 === d ? (d = dots.core.reverse_board_position.call(null, c[6]), d = [cljs.core.str("-from"), cljs.core.str(d)].join(""), c[2] = d, c[1] = 4, "\ufdd0:recur") : 1 === d ? (d = a.call(null, "\ufdd0:elem"), d = jayq.core.$.call(null, d), e = dots.core.top_pos_from_dot_elem.call(null, d), c[5] = d, c[6] = e, c[1] = cljs.core.truth_(e) ? 2 : 3, "\ufdd0:recur") : null
+      }, e = null, f = function() {
         var a = Array(7);
-        a[0] = d;
+        a[0] = e;
         a[1] = 1;
         return a
-      }, f = function(c) {
+      }, g = function(a) {
         for(;;) {
-          var d = function() {
-            var d = c[1] | 0;
-            if(cljs.core._EQ_.call(null, 1, d)) {
-              var d = c[5], d = c[6], d = a.call(null, "\ufdd0:elem"), d = jayq.core.$.call(null, d), e = dots.core.top_pos_from_dot_elem.call(null, d);
-              c[5] = d;
-              c[6] = e;
-              d = c;
-              d[1] = cljs.core.truth_(e) ? 2 : 3;
-              return"\ufdd0:recur"
-            }
-            if(cljs.core._EQ_.call(null, 2, d)) {
-              return d = c[6], d = dots.core.reverse_board_position.call(null, d), e = [cljs.core.str("-from"), cljs.core.str(d)].join(""), d = c, d[2] = e, d[1] = 4, "\ufdd0:recur"
-            }
-            if(cljs.core._EQ_.call(null, 3, d)) {
-              return d = c, d[2] = "", d[1] = 4, "\ufdd0:recur"
-            }
-            if(cljs.core._EQ_.call(null, 4, d)) {
-              var d = c[5], e = c[2], f = cljs.core.last.call(null, b), f = dots.core.reverse_board_position.call(null, f), e = [cljs.core.str("level-"), cljs.core.str(f), cljs.core.str(e)].join(""), e = d.addClass(e), d = c;
-              return cljs.core.async.impl.ioc_helpers.return_chan.call(null, d, e)
-            }
-            throw Error([cljs.core.str("No matching clause: "), cljs.core.str(c[1] | 0)].join(""));
-          }();
-          if("\ufdd0:recur" !== d) {
-            return d
+          var b = d.call(null, a);
+          if("\ufdd0:recur" !== b) {
+            return b
           }
         }
-      }, d = function(a) {
+      }, e = function(a) {
         switch(arguments.length) {
           case 0:
-            return e.call(this);
+            return f.call(this);
           case 1:
-            return f.call(this, a)
+            return g.call(this, a)
         }
         throw Error("Invalid arity: " + arguments.length);
       };
-      d.cljs$core$IFn$_invoke$arity$0 = e;
-      d.cljs$core$IFn$_invoke$arity$1 = f;
-      var g = d.call(null);
-      g[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
-      return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, g)
+      e.cljs$core$IFn$_invoke$arity$0 = f;
+      e.cljs$core$IFn$_invoke$arity$1 = g;
+      var h = e.call(null);
+      h[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
+      return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, h)
     });
     return c
   }
@@ -18829,11 +18784,11 @@ dots.core.add_dots_to_board = function(a) {
   for(var a = cljs.core.seq.call(null, a), b = null, c = 0, d = 0;;) {
     if(d < c) {
       var e = cljs.core._nth.call(null, b, d), e = cljs.core.seq_QMARK_.call(null, e) ? cljs.core.apply.call(null, cljs.core.hash_map, e) : e, e = cljs.core.get.call(null, e, "\ufdd0:elem");
-      jayq.core.append.call(null, jayq.core.$.call(null, ".board"), e);
+      jayq.core.append.call(null, jayq.core.$.call(null, ".dots-game .board"), e);
       d += 1
     }else {
       if(a = cljs.core.seq.call(null, a)) {
-        cljs.core.chunked_seq_QMARK_.call(null, a) ? (c = cljs.core.chunk_first.call(null, a), a = cljs.core.chunk_rest.call(null, a), b = c, c = cljs.core.count.call(null, c)) : (b = cljs.core.first.call(null, a), b = cljs.core.seq_QMARK_.call(null, b) ? cljs.core.apply.call(null, cljs.core.hash_map, b) : b, e = cljs.core.get.call(null, b, "\ufdd0:elem"), jayq.core.append.call(null, jayq.core.$.call(null, ".board"), e), a = cljs.core.next.call(null, a), b = null, c = 0), d = 0
+        cljs.core.chunked_seq_QMARK_.call(null, a) ? (c = cljs.core.chunk_first.call(null, a), a = cljs.core.chunk_rest.call(null, a), b = c, c = cljs.core.count.call(null, c)) : (b = cljs.core.first.call(null, a), b = cljs.core.seq_QMARK_.call(null, b) ? cljs.core.apply.call(null, cljs.core.hash_map, b) : b, e = cljs.core.get.call(null, b, "\ufdd0:elem"), jayq.core.append.call(null, jayq.core.$.call(null, ".dots-game .board"), e), a = cljs.core.next.call(null, a), b = null, c = 0), d = 0
       }else {
         return null
       }
@@ -18842,14 +18797,17 @@ dots.core.add_dots_to_board = function(a) {
 };
 dots.core.render_view = function(a) {
   var b = crate.core.html.call(null, dots.core.board.call(null, a));
-  jayq.core.inner.call(null, jayq.core.$.call(null, ".container"), b);
+  jayq.core.inner.call(null, jayq.core.$.call(null, ".dots-game-container"), b);
   return cljs.core.mapv.call(null, dots.core.add_dots_to_board, a.call(null, "\ufdd0:board"))
 };
 dots.core.dot_index = function(a, b) {
-  var c = cljs.core.seq_QMARK_.call(null, b) ? cljs.core.apply.call(null, cljs.core.hash_map, b) : b, d = cljs.core.get.call(null, c, "\ufdd0:y"), c = cljs.core.get.call(null, c, "\ufdd0:x"), d = cljs.core.map.call(null, cljs.core._, cljs.core.PersistentVector.fromArray([c, d], !0), a, cljs.core.PersistentVector.fromArray([12, 12], !0)), c = cljs.core.nth.call(null, d, 0, null), d = cljs.core.nth.call(null, d, 1, null), d = dots.core.reverse_board_position.call(null, d / dots.core.grid_unit_size | 
-  0), c = c / dots.core.grid_unit_size | 0, e;
-  e = (e = dots.core.board_size > d) ? dots.core.board_size > c : e;
-  return e ? cljs.core.PersistentVector.fromArray([c, d], !0) : null
+  var c = cljs.core.seq_QMARK_.call(null, b) ? cljs.core.apply.call(null, cljs.core.hash_map, b) : b, d = cljs.core.get.call(null, c, "\ufdd0:y"), c = cljs.core.get.call(null, c, "\ufdd0:x"), c = cljs.core.map.call(null, cljs.core._, cljs.core.PersistentVector.fromArray([c, d], !0), a, cljs.core.PersistentVector.fromArray([12, 12], !0)), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), e = dots.core.reverse_board_position.call(null, c / dots.core.grid_unit_size | 
+  0), f = d / dots.core.grid_unit_size | 0;
+  return cljs.core.truth_(function() {
+    var a;
+    a = (a = dots.core.board_size > e) ? -1 < e : a;
+    return cljs.core.truth_(a) ? (a = dots.core.board_size > f) ? -1 < f : a : a
+  }()) ? cljs.core.PersistentVector.fromArray([f, e], !0) : null
 };
 dots.core.dot_color = function(a, b) {
   var c = cljs.core.seq_QMARK_.call(null, a) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a, c = cljs.core.get.call(null, c, "\ufdd0:board");
@@ -18909,117 +18867,93 @@ dots.core.flash_class = function(a) {
   return[cljs.core.str(cljs.core.name.call(null, a)), cljs.core.str("-trans")].join("")
 };
 dots.core.flash_color_on = function(a) {
-  return jayq.core.$.call(null, ".board-area").addClass(dots.core.flash_class.call(null, a))
+  return jayq.core.$.call(null, ".dots-game .board-area").addClass(dots.core.flash_class.call(null, a))
 };
 dots.core.flash_color_off = function(a) {
-  return jayq.core.$.call(null, ".board-area").removeClass(dots.core.flash_class.call(null, a))
+  return jayq.core.$.call(null, ".dots-game .board-area").removeClass(dots.core.flash_class.call(null, a))
 };
 dots.core.get_dots_to_remove = function(a, b) {
   var c = cljs.core.async.chan.call(null, 1);
   cljs.core.async.impl.dispatch.run.call(null, function() {
-    var d = null, e = function() {
+    var d = function(c) {
+      var d = c[1];
+      if(1 === d) {
+        var e, d = b;
+        c[5] = d;
+        c[6] = null;
+        c[2] = null;
+        c[1] = 2;
+        return"\ufdd0:recur"
+      }
+      if(2 === d) {
+        return d = c[5], e = c[6], e = dots.core.render_dot_chain_update.call(null, e, d), d = d.call(null, "\ufdd0:dot-chain"), d = dots.core.dot_chain_cycle_QMARK_.call(null, d), c[7] = e, c[1] = cljs.core.truth_(d) ? 4 : 5, "\ufdd0:recur"
+      }
+      if(3 === d) {
+        return d = c[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)
+      }
+      if(4 === d) {
+        d = c[5];
+        e = c[6];
+        var f = c[8];
+        e = (new cljs.core.Keyword("\ufdd0:dot-chain")).call(null, d);
+        e = cljs.core.first.call(null, e);
+        d = dots.core.dot_color.call(null, d, e);
+        e = dots.core.flash_color_on.call(null, d);
+        var g = cljs.core.vector.call(null, a), g = dots.core.select_chan.call(null, function(a) {
+          var b = cljs.core.nth.call(null, a, 0, null);
+          cljs.core.nth.call(null, a, 1, null);
+          return cljs.core._EQ_.call(null, b, "\ufdd0:drawend")
+        }, g);
+        c[8] = d;
+        c[9] = e;
+        return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, c, 7, g)
+      }
+      if(5 === d) {
+        return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, c, 8, a)
+      }
+      if(6 === d) {
+        return d = c[2], c[2] = d, c[1] = 3, "\ufdd0:recur"
+      }
+      if(7 === d) {
+        d = c[5];
+        f = c[8];
+        e = c[2];
+        var g = dots.core.flash_color_off.call(null, f), h = dots.core.erase_dot_chain.call(null), p = dots.core.dot_positions_for_focused_color.call(null, d), d = cljs.core.assoc.call(null, d, "\ufdd0:dot-chain", p, "\ufdd0:exclude-color", f);
+        c[10] = h;
+        c[11] = g;
+        c[12] = e;
+        c[2] = d;
+        c[1] = 6;
+        return"\ufdd0:recur"
+      }
+      return 8 === d ? (e = c[2], d = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), d = cljs.core._EQ_.call(null, d, "\ufdd0:drawend"), c[13] = e, c[1] = d ? 9 : 10, "\ufdd0:recur") : 9 === d ? (d = c[5], e = dots.core.erase_dot_chain.call(null), c[14] = e, c[2] = d, c[1] = 11, "\ufdd0:recur") : 10 === d ? (e = c[15], e = c[13], d = c[5], d = d.call(null, "\ufdd0:dot-index").call(null, e), c[15] = d, c[1] = cljs.core.truth_(d) ? 12 : 13, "\ufdd0:recur") : 11 === 
+      d ? (d = c[2], c[2] = d, c[1] = 6, "\ufdd0:recur") : 12 === d ? (e = c[15], d = c[5], e = dots.core.transition_dot_chain_state.call(null, d, e), d = cljs.core.assoc.call(null, d, "\ufdd0:dot-chain", e), c[2] = d, c[1] = 14, "\ufdd0:recur") : 13 === d ? (d = c[5], c[2] = d, c[1] = 14, "\ufdd0:recur") : 14 === d ? (d = c[5], e = c[2], c[5] = e, c[6] = d, c[2] = null, c[1] = 2, "\ufdd0:recur") : null
+    }, e = null, f = function() {
       var a = Array(16);
-      a[0] = d;
+      a[0] = e;
       a[1] = 1;
       return a
-    }, f = function(c) {
+    }, g = function(a) {
       for(;;) {
-        var d = function() {
-          var d = c[1] | 0;
-          if(cljs.core._EQ_.call(null, 1, d)) {
-            var e, d = b;
-            c[5] = null;
-            c[6] = d;
-            d = e = c;
-            d[2] = null;
-            d[1] = 2;
-            return"\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 2, d)) {
-            return e = c[5], d = c[6], e = dots.core.render_dot_chain_update.call(null, e, d), d = d.call(null, "\ufdd0:dot-chain"), d = dots.core.dot_chain_cycle_QMARK_.call(null, d), c[7] = e, e = c, e[1] = cljs.core.truth_(d) ? 4 : 5, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 3, d)) {
-            return d = c[2], e = c, cljs.core.async.impl.ioc_helpers.return_chan.call(null, e, d)
-          }
-          if(cljs.core._EQ_.call(null, 4, d)) {
-            var f = c[8];
-            e = c[5];
-            d = c[6];
-            e = (new cljs.core.Keyword("\ufdd0:dot-chain")).call(null, d);
-            e = cljs.core.first.call(null, e);
-            d = dots.core.dot_color.call(null, d, e);
-            e = dots.core.flash_color_on.call(null, d);
-            f = cljs.core.vector.call(null, a);
-            f = dots.core.select_chan.call(null, function(a) {
-              var b = cljs.core.nth.call(null, a, 0, null);
-              cljs.core.nth.call(null, a, 1, null);
-              return cljs.core._EQ_.call(null, b, "\ufdd0:drawend")
-            }, f);
-            c[8] = d;
-            c[9] = e;
-            e = c;
-            return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, e, 7, f)
-          }
-          if(cljs.core._EQ_.call(null, 5, d)) {
-            return e = c, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, e, 8, a)
-          }
-          if(cljs.core._EQ_.call(null, 6, d)) {
-            return d = c[2], e = c, e[2] = d, e[1] = 3, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 7, d)) {
-            f = c[8];
-            d = c[6];
-            e = c[2];
-            var f = dots.core.flash_color_off.call(null, f), g = dots.core.erase_dot_chain.call(null), i = dots.core.dot_positions_for_focused_color.call(null, d), d = cljs.core.assoc.call(null, d, "\ufdd0:dot-chain", i);
-            c[10] = e;
-            c[11] = f;
-            c[12] = g;
-            e = c;
-            e[2] = d;
-            e[1] = 6;
-            return"\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 8, d)) {
-            return e = c[2], d = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), d = cljs.core._EQ_.call(null, d, "\ufdd0:drawend"), c[13] = e, e = c, e[1] = d ? 9 : 10, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 9, d)) {
-            return d = c[6], e = dots.core.erase_dot_chain.call(null), c[14] = e, e = c, e[2] = d, e[1] = 11, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 10, d)) {
-            return e = c[15], d = c[6], e = c[13], d = d.call(null, "\ufdd0:dot-index").call(null, e), c[15] = d, e = c, e[1] = cljs.core.truth_(d) ? 12 : 13, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 11, d)) {
-            return d = c[2], e = c, e[2] = d, e[1] = 6, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 12, d)) {
-            return e = c[15], d = c[6], e = dots.core.transition_dot_chain_state.call(null, d, e), d = cljs.core.assoc.call(null, d, "\ufdd0:dot-chain", e), e = c, e[2] = d, e[1] = 14, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 13, d)) {
-            return d = c[6], e = c, e[2] = d, e[1] = 14, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 14, d)) {
-            return d = c[6], e = c[2], c[5] = d, c[6] = e, d = e = c, d[2] = null, d[1] = 2, "\ufdd0:recur"
-          }
-          throw Error([cljs.core.str("No matching clause: "), cljs.core.str(c[1] | 0)].join(""));
-        }();
-        if("\ufdd0:recur" !== d) {
-          return d
+        var b = d.call(null, a);
+        if("\ufdd0:recur" !== b) {
+          return b
         }
       }
-    }, d = function(a) {
+    }, e = function(a) {
       switch(arguments.length) {
         case 0:
-          return e.call(this);
+          return f.call(this);
         case 1:
-          return f.call(this, a)
+          return g.call(this, a)
       }
       throw Error("Invalid arity: " + arguments.length);
     };
-    d.cljs$core$IFn$_invoke$arity$0 = e;
-    d.cljs$core$IFn$_invoke$arity$1 = f;
-    var g = d.call(null);
-    g[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
-    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, g)
+    e.cljs$core$IFn$_invoke$arity$0 = f;
+    e.cljs$core$IFn$_invoke$arity$1 = g;
+    var h = e.call(null);
+    h[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
+    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, h)
   });
   return c
 };
@@ -19051,95 +18985,64 @@ dots.core.render_remove_dots = function(a, b) {
   }(c), a.call(null, "\ufdd0:board"));
   return cljs.core.assoc.call(null, a, "\ufdd0:board", cljs.core.vec.call(null, c))
 };
-dots.core.add_missing_dots_helper = function(a, b) {
+dots.core.add_missing_dots_helper = function(a, b, c) {
   if(cljs.core._EQ_.call(null, cljs.core.count.call(null, b), dots.core.board_size)) {
     return b
   }
-  var c = cljs.core.map.call(null, dots.core.create_dot, cljs.core.repeat.call(null, a), cljs.core.repeat.call(null, dots.core.offscreen_dot_position), cljs.core.take.call(null, dots.core.board_size - cljs.core.count.call(null, b), dots.core.rand_colors.call(null)));
-  dots.core.add_dots_to_board.call(null, c);
-  return cljs.core.vec.call(null, cljs.core.concat.call(null, b, c))
+  a = cljs.core.map.call(null, dots.core.create_dot, cljs.core.repeat.call(null, a), cljs.core.repeat.call(null, dots.core.offscreen_dot_position), cljs.core.take.call(null, dots.core.board_size - cljs.core.count.call(null, b), dots.core.rand_colors.call(null, c)));
+  dots.core.add_dots_to_board.call(null, a);
+  return cljs.core.vec.call(null, cljs.core.concat.call(null, b, a))
 };
 dots.core.add_missing_dots = function(a) {
-  var a = cljs.core.seq_QMARK_.call(null, a) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a, b = cljs.core.get.call(null, a, "\ufdd0:board");
-  return cljs.core.assoc.call(null, a, "\ufdd0:board", cljs.core.vec.call(null, cljs.core.map_indexed.call(null, function(a, b) {
-    return dots.core.add_missing_dots_helper.call(null, a, b)
-  }, b)))
+  var a = cljs.core.seq_QMARK_.call(null, a) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a, b = cljs.core.get.call(null, a, "\ufdd0:exclude-color"), c = cljs.core.get.call(null, a, "\ufdd0:board");
+  return cljs.core.assoc.call(null, a, "\ufdd0:board", cljs.core.vec.call(null, cljs.core.map_indexed.call(null, function(a, c) {
+    return dots.core.add_missing_dots_helper.call(null, a, c, b)
+  }, c)), "\ufdd0:exclude-color", null)
 };
 dots.core.render_position_updates_helper = function(a, b) {
   var c = cljs.core.async.chan.call(null, 1);
   cljs.core.async.impl.dispatch.run.call(null, function() {
-    var d = null, e = function() {
-      var a = Array(14);
-      a[0] = d;
+    var d = function(c) {
+      var d = c[1];
+      if(1 === d) {
+        var e = cljs.core.nth.call(null, b, 0, null), f = cljs.core.nthnext.call(null, b, 1), d = b;
+        c[5] = e;
+        c[6] = 0;
+        c[7] = d;
+        c[8] = f;
+        c[2] = null;
+        c[1] = 2;
+        return"\ufdd0:recur"
+      }
+      return 2 === d ? (e = c[9], d = c[7], f = cljs.core.nth.call(null, d, 0, null), e = cljs.core.nthnext.call(null, d, 1), d = cljs.core.not.call(null, null == f), c[9] = f, c[10] = e, c[1] = d ? 4 : 5, "\ufdd0:recur") : 3 === d ? (d = c[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)) : 4 === d ? (e = c[9], d = c[6], d = cljs.core.vector.call(null, a, d), d = dots.core.at_correct_postion_QMARK_.call(null, e, d), d = cljs.core.not.call(null, d), c[1] = d ? 7 : 8, "\ufdd0:recur") : 
+      5 === d ? (c[2] = null, c[1] = 6, "\ufdd0:recur") : 6 === d ? (d = c[2], c[2] = d, c[1] = 3, "\ufdd0:recur") : 7 === d ? (d = cljs.core.async.timeout.call(null, 80), cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, c, 10, d)) : 8 === d ? (c[2] = null, c[1] = 9, "\ufdd0:recur") : 9 === d ? (e = c[10], d = c[6], f = c[2], c[6] = d + 1, c[7] = e, c[11] = f, c[2] = null, c[1] = 2, "\ufdd0:recur") : 10 === d ? (e = c[9], d = c[6], f = c[2], d = cljs.core.vector.call(null, a, d), d = dots.core.update_dot.call(null, 
+      e, d), c[12] = f, c[2] = d, c[1] = 9, "\ufdd0:recur") : null
+    }, e = null, f = function() {
+      var a = Array(13);
+      a[0] = e;
       a[1] = 1;
       return a
-    }, f = function(c) {
+    }, g = function(a) {
       for(;;) {
-        var d = function() {
-          var d = c[1] | 0;
-          if(cljs.core._EQ_.call(null, 1, d)) {
-            var e = cljs.core.nth.call(null, b, 0, null), f = cljs.core.nthnext.call(null, b, 1), d = b;
-            c[5] = e;
-            c[6] = d;
-            c[7] = f;
-            c[8] = 0;
-            d = c;
-            d[2] = null;
-            d[1] = 2;
-            return"\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 2, d)) {
-            var e = c[9], d = c[6], f = cljs.core.nth.call(null, d, 0, null), e = cljs.core.nthnext.call(null, d, 1), g = cljs.core.not.call(null, null == f);
-            c[10] = e;
-            c[9] = f;
-            d = c;
-            d[1] = g ? 4 : 5;
-            return"\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 3, d)) {
-            return e = c[2], d = c, cljs.core.async.impl.ioc_helpers.return_chan.call(null, d, e)
-          }
-          if(cljs.core._EQ_.call(null, 4, d)) {
-            return e = c[9], d = c[8], d = cljs.core.vector.call(null, a, d), d = dots.core.at_correct_postion_QMARK_.call(null, e, d), e = cljs.core.not.call(null, d), d = c, d[1] = e ? 7 : 8, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 5, d)) {
-            return d = c, d[2] = null, d[1] = 6, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 6, d)) {
-            return e = c[2], d = c, d[2] = e, d[1] = 3, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 7, d)) {
-            return e = cljs.core.async.timeout.call(null, 80), d = c, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 10, e)
-          }
-          if(cljs.core._EQ_.call(null, 8, d)) {
-            return d = c, d[2] = null, d[1] = 9, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 9, d)) {
-            return e = c[10], d = c[8], f = c[2], c[11] = f, c[6] = e, c[8] = d + 1, d = c, d[2] = null, d[1] = 2, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 10, d)) {
-            return e = c[9], d = c[8], f = c[2], g = cljs.core.vector.call(null, a, d), g = cljs.core.prn_str.call(null, g), g = jayq.util.log.call(null, "updating dot ", g), d = cljs.core.vector.call(null, a, d), e = dots.core.update_dot.call(null, e, d), c[12] = f, c[13] = g, d = c, d[2] = e, d[1] = 9, "\ufdd0:recur"
-          }
-          throw Error([cljs.core.str("No matching clause: "), cljs.core.str(c[1] | 0)].join(""));
-        }();
-        if("\ufdd0:recur" !== d) {
-          return d
+        var b = d.call(null, a);
+        if("\ufdd0:recur" !== b) {
+          return b
         }
       }
-    }, d = function(a) {
+    }, e = function(a) {
       switch(arguments.length) {
         case 0:
-          return e.call(this);
+          return f.call(this);
         case 1:
-          return f.call(this, a)
+          return g.call(this, a)
       }
       throw Error("Invalid arity: " + arguments.length);
     };
-    d.cljs$core$IFn$_invoke$arity$0 = e;
-    d.cljs$core$IFn$_invoke$arity$1 = f;
-    var g = d.call(null);
-    g[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
-    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, g)
+    e.cljs$core$IFn$_invoke$arity$0 = f;
+    e.cljs$core$IFn$_invoke$arity$1 = g;
+    var h = e.call(null);
+    h[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
+    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, h)
   });
   return c
 };
@@ -19158,217 +19061,44 @@ dots.core.render_score = function(a) {
 dots.core.game_timer = function(a) {
   var b = cljs.core.async.chan.call(null, 1);
   cljs.core.async.impl.dispatch.run.call(null, function() {
-    var c = null, d = function() {
+    var c = function(b) {
+      var c = b[1];
+      if(7 === c) {
+        return c = b, c[2] = b[2], c[1] = 3, "\ufdd0:recur"
+      }
+      if(6 === c) {
+        var c = b[5], d = cljs.core.async.timeout.call(null, 1E3);
+        b[5] = c - 1;
+        b[6] = d;
+        b[2] = null;
+        b[1] = 2;
+        return"\ufdd0:recur"
+      }
+      if(5 === c) {
+        return c = b[5], b[2] = c, b[1] = 7, "\ufdd0:recur"
+      }
+      if(4 === c) {
+        return c = b[5], b[7] = b[2], b[1] = cljs.core.truth_(0 === c) ? 5 : 6, "\ufdd0:recur"
+      }
+      if(3 === c) {
+        return c = b[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, b, c)
+      }
+      if(2 === c) {
+        var c = b[5], d = b[6], e = jayq.core.$.call(null, ".time-val"), c = jayq.core.inner.call(null, e, c);
+        b[8] = c;
+        return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, b, 4, d)
+      }
+      return 1 === c ? (d = cljs.core.async.timeout.call(null, 1E3), c = a, b[5] = c, b[6] = d, b[2] = null, b[1] = 2, "\ufdd0:recur") : null
+    }, d = null, e = function() {
       var a = Array(9);
-      a[0] = c;
-      a[1] = 1;
-      return a
-    }, e = function(b) {
-      for(;;) {
-        var c = function() {
-          var c = b[1] | 0;
-          if(cljs.core._EQ_.call(null, 1, c)) {
-            var d = cljs.core.async.timeout.call(null, 1E3), c = a, e;
-            b[5] = c;
-            b[6] = d;
-            c = e = b;
-            c[2] = null;
-            c[1] = 2;
-            return"\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 2, c)) {
-            return c = b[5], d = b[6], e = jayq.core.$.call(null, ".time-val"), c = jayq.core.inner.call(null, e, c), b[8] = c, e = b, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, e, 4, d)
-          }
-          if(cljs.core._EQ_.call(null, 3, c)) {
-            return c = b[2], e = b, cljs.core.async.impl.ioc_helpers.return_chan.call(null, e, c)
-          }
-          if(cljs.core._EQ_.call(null, 4, c)) {
-            return c = b[5], b[7] = b[2], e = b, e[1] = cljs.core.truth_(0 === c) ? 5 : 6, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 5, c)) {
-            return c = b[5], d = e = b, d[2] = c, d[1] = 7, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 6, c)) {
-            return c = b[5], d = cljs.core.async.timeout.call(null, 1E3), b[5] = c - 1, b[6] = d, c = e = b, c[2] = null, c[1] = 2, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 7, c)) {
-            return c = b[2], d = e = b, d[2] = c, d[1] = 3, "\ufdd0:recur"
-          }
-          throw Error([cljs.core.str("No matching clause: "), cljs.core.str(b[1] | 0)].join(""));
-        }();
-        if("\ufdd0:recur" !== c) {
-          return c
-        }
-      }
-    }, c = function(a) {
-      switch(arguments.length) {
-        case 0:
-          return d.call(this);
-        case 1:
-          return e.call(this, a)
-      }
-      throw Error("Invalid arity: " + arguments.length);
-    };
-    c.cljs$core$IFn$_invoke$arity$0 = d;
-    c.cljs$core$IFn$_invoke$arity$1 = e;
-    var f = c.call(null);
-    f[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = b;
-    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, f)
-  });
-  return b
-};
-dots.core.create_board = function() {
-  return cljs.core.vec.call(null, cljs.core.map_indexed.call(null, function(a) {
-    return cljs.core.vec.call(null, cljs.core.map_indexed.call(null, cljs.core.partial.call(null, dots.core.create_dot, a), cljs.core.take.call(null, dots.core.board_size, dots.core.rand_colors.call(null))))
-  }, cljs.core.range.call(null, dots.core.board_size)))
-};
-dots.core.setup_game_state = function() {
-  var a = cljs.core.PersistentArrayMap.fromArray(["\ufdd0:board", dots.core.create_board.call(null)], !0);
-  dots.core.render_view.call(null, a);
-  var b = cljs.core.juxt.call(null, "\ufdd0:left", "\ufdd0:top").call(null, jayq.core.offset.call(null, jayq.core.$.call(null, ".board")));
-  return cljs.core.assoc.call(null, a, "\ufdd0:dot-index", cljs.core.partial.call(null, dots.core.dot_index, b), "\ufdd0:dot-chain", cljs.core.PersistentVector.EMPTY, "\ufdd0:score", 0)
-};
-dots.core.game_loop = function(a, b) {
-  var c = dots.core.game_timer.call(null, 60), d = cljs.core.async.chan.call(null, 1);
-  cljs.core.async.impl.dispatch.run.call(null, function() {
-    var e = null, f = function() {
-      var a = Array(13);
-      a[0] = e;
-      a[1] = 1;
-      return a
-    }, g = function(d) {
-      for(;;) {
-        var e = function() {
-          var e = d[1] | 0;
-          if(cljs.core._EQ_.call(null, 1, e)) {
-            var f = a;
-            d[5] = f;
-            e = d;
-            e[2] = null;
-            e[1] = 2;
-            return"\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 2, e)) {
-            var f = d[5], e = dots.core.render_score.call(null, f), g = dots.core.render_position_updates.call(null, f), f = dots.core.add_missing_dots.call(null, f), h = cljs.core.async.timeout.call(null, 300);
-            d[6] = g;
-            d[7] = e;
-            d[8] = f;
-            e = d;
-            return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, e, 4, h)
-          }
-          if(cljs.core._EQ_.call(null, 3, e)) {
-            return f = d[2], e = d, cljs.core.async.impl.ioc_helpers.return_chan.call(null, e, f)
-          }
-          if(cljs.core._EQ_.call(null, 4, e)) {
-            return f = d[8], e = d[2], g = dots.core.render_position_updates.call(null, f), f = dots.core.get_dots_to_remove.call(null, b, f), f = cljs.core.vector.call(null, f, c), d[9] = e, d[10] = g, e = d, cljs.core.async.impl.ioc_helpers.ioc_alts_BANG_.call(null, e, 5, f)
-          }
-          if(cljs.core._EQ_.call(null, 5, e)) {
-            return e = d[2], f = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), g = cljs.core._EQ_.call(null, e, c), d[11] = f, e = d, e[1] = g ? 6 : 7, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 6, e)) {
-            return f = d[8], e = d, e[2] = f, e[1] = 8, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 7, e)) {
-            return f = d[11], f = cljs.core.seq_QMARK_.call(null, f), e = d, e[1] = f ? 9 : 10, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 8, e)) {
-            return f = d[2], e = d, e[2] = f, e[1] = 3, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 9, e)) {
-            return f = d[11], f = cljs.core.apply.call(null, cljs.core.hash_map, f), e = d, e[2] = f, e[1] = 11, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 10, e)) {
-            return f = d[11], e = d, e[2] = f, e[1] = 11, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 11, e)) {
-            return g = d[12], e = cljs.core.get.call(null, d[2], "\ufdd0:dot-chain"), f = 1 < cljs.core.count.call(null, e), d[12] = e, e = d, e[1] = cljs.core.truth_(f) ? 12 : 13, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 12, e)) {
-            return g = d[12], f = d[8], e = dots.core.render_remove_dots.call(null, f, g), f = f.call(null, "\ufdd0:score"), g = cljs.core.set.call(null, g), g = cljs.core.count.call(null, g), f = cljs.core.assoc.call(null, e, "\ufdd0:score", f + g), e = d, e[2] = f, e[1] = 14, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 13, e)) {
-            return f = d[8], e = d, e[2] = f, e[1] = 14, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 14, e)) {
-            return f = d[2], d[5] = f, e = d, e[2] = null, e[1] = 2, "\ufdd0:recur"
-          }
-          throw Error([cljs.core.str("No matching clause: "), cljs.core.str(d[1] | 0)].join(""));
-        }();
-        if("\ufdd0:recur" !== e) {
-          return e
-        }
-      }
-    }, e = function(a) {
-      switch(arguments.length) {
-        case 0:
-          return f.call(this);
-        case 1:
-          return g.call(this, a)
-      }
-      throw Error("Invalid arity: " + arguments.length);
-    };
-    e.cljs$core$IFn$_invoke$arity$0 = f;
-    e.cljs$core$IFn$_invoke$arity$1 = g;
-    var h = e.call(null);
-    h[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = d;
-    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, h)
-  });
-  return d
-};
-dots.core.render_screen = function(a) {
-  a = crate.core.html.call(null, a);
-  return jayq.core.inner.call(null, jayq.core.$.call(null, ".container"), a)
-};
-dots.core.app_loop = function() {
-  var a = dots.core.draw_chan.call(null, "body"), b = dots.core.click_chan.call(null, ".start-new-game", "\ufdd0:start-new-game"), c = cljs.core.async.chan.call(null, 1);
-  cljs.core.async.impl.dispatch.run.call(null, function() {
-    var d = null, e = function() {
-      var a = Array(10);
       a[0] = d;
       a[1] = 1;
       return a
-    }, f = function(c) {
+    }, f = function(a) {
       for(;;) {
-        var d = function() {
-          var d = c[1] | 0;
-          if(cljs.core._EQ_.call(null, 1, d)) {
-            var d = dots.core.start_screen.call(null), d = dots.core.render_screen.call(null, d), e = cljs.core.vector.call(null, b, a), e = dots.core.select_chan.call(null, function(a) {
-              return cljs.core._EQ_.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0:start-new-game"], !0), a)
-            }, e);
-            c[9] = d;
-            d = c;
-            return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 2, e)
-          }
-          if(cljs.core._EQ_.call(null, 2, d)) {
-            return c[8] = c[2], d = c, d[2] = null, d[1] = 3, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 3, d)) {
-            return d = dots.core.setup_game_state.call(null), e = dots.core.game_loop.call(null, d, a), d = c, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 5, e)
-          }
-          if(cljs.core._EQ_.call(null, 4, d)) {
-            return e = c[2], d = c, cljs.core.async.impl.ioc_helpers.return_chan.call(null, d, e)
-          }
-          if(cljs.core._EQ_.call(null, 5, d)) {
-            return e = c[7], d = c[2], e = cljs.core.seq_QMARK_.call(null, d), c[7] = d, d = c, d[1] = e ? 6 : 7, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 6, d)) {
-            return e = c[7], e = cljs.core.apply.call(null, cljs.core.hash_map, e), d = c, d[2] = e, d[1] = 8, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 7, d)) {
-            return e = c[7], d = c, d[2] = e, d[1] = 8, "\ufdd0:recur"
-          }
-          if(cljs.core._EQ_.call(null, 8, d)) {
-            return d = cljs.core.get.call(null, c[2], "\ufdd0:score"), d = dots.core.score_screen.call(null, d), d = dots.core.render_screen.call(null, d), e = cljs.core.vector.call(null, b, a), e = dots.core.select_chan.call(null, function(a) {
-              return cljs.core._EQ_.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0:start-new-game"], !0), a)
-            }, e), c[6] = d, d = c, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 9, e)
-          }
-          if(cljs.core._EQ_.call(null, 9, d)) {
-            return c[5] = c[2], d = c, d[2] = null, d[1] = 3, "\ufdd0:recur"
-          }
-          throw Error([cljs.core.str("No matching clause: "), cljs.core.str(c[1] | 0)].join(""));
-        }();
-        if("\ufdd0:recur" !== d) {
-          return d
+        var b = c.call(null, a);
+        if("\ufdd0:recur" !== b) {
+          return b
         }
       }
     }, d = function(a) {
@@ -19383,8 +19113,119 @@ dots.core.app_loop = function() {
     d.cljs$core$IFn$_invoke$arity$0 = e;
     d.cljs$core$IFn$_invoke$arity$1 = f;
     var g = d.call(null);
-    g[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
+    g[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = b;
     return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, g)
+  });
+  return b
+};
+dots.core.create_board = function() {
+  return cljs.core.vec.call(null, cljs.core.map_indexed.call(null, function(a) {
+    return cljs.core.vec.call(null, cljs.core.map_indexed.call(null, cljs.core.partial.call(null, dots.core.create_dot, a), cljs.core.take.call(null, dots.core.board_size, dots.core.rand_colors.call(null))))
+  }, cljs.core.range.call(null, dots.core.board_size)))
+};
+dots.core.setup_game_state = function() {
+  var a = cljs.core.PersistentArrayMap.fromArray(["\ufdd0:board", dots.core.create_board.call(null)], !0);
+  dots.core.render_view.call(null, a);
+  var b = cljs.core.juxt.call(null, "\ufdd0:left", "\ufdd0:top").call(null, jayq.core.offset.call(null, jayq.core.$.call(null, ".dots-game .board")));
+  return cljs.core.assoc.call(null, a, "\ufdd0:dot-index", cljs.core.partial.call(null, dots.core.dot_index, b), "\ufdd0:dot-chain", cljs.core.PersistentVector.EMPTY, "\ufdd0:score", 0)
+};
+dots.core.game_loop = function(a, b) {
+  var c = dots.core.game_timer.call(null, 60), d = cljs.core.async.chan.call(null, 1);
+  cljs.core.async.impl.dispatch.run.call(null, function() {
+    var e = function(d) {
+      var e = d[1];
+      if(1 === e) {
+        return e = a, d[5] = e, d[2] = null, d[1] = 2, "\ufdd0:recur"
+      }
+      if(2 === e) {
+        var e = d[5], f = dots.core.render_score.call(null, e), g = dots.core.render_position_updates.call(null, e), e = dots.core.add_missing_dots.call(null, e), h = cljs.core.async.timeout.call(null, 300);
+        d[6] = f;
+        d[7] = g;
+        d[8] = e;
+        return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 4, h)
+      }
+      return 3 === e ? (e = d[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, d, e)) : 4 === e ? (e = d[8], f = d[2], g = dots.core.render_position_updates.call(null, e), e = dots.core.get_dots_to_remove.call(null, b, e), e = cljs.core.vector.call(null, e, c), d[9] = f, d[10] = g, cljs.core.async.impl.ioc_helpers.ioc_alts_BANG_.call(null, d, 5, e)) : 5 === e ? (f = d[2], e = cljs.core.nth.call(null, f, 0, null), f = cljs.core.nth.call(null, f, 1, null), f = cljs.core._EQ_.call(null, f, 
+      c), d[11] = e, d[1] = f ? 6 : 7, "\ufdd0:recur") : 6 === e ? (e = d[8], d[2] = e, d[1] = 8, "\ufdd0:recur") : 7 === e ? (e = d[11], e = cljs.core.seq_QMARK_.call(null, e), d[1] = e ? 9 : 10, "\ufdd0:recur") : 8 === e ? (e = d[2], d[2] = e, d[1] = 3, "\ufdd0:recur") : 9 === e ? (e = d[11], e = cljs.core.apply.call(null, cljs.core.hash_map, e), d[2] = e, d[1] = 11, "\ufdd0:recur") : 10 === e ? (e = d[11], d[2] = e, d[1] = 11, "\ufdd0:recur") : 11 === e ? (h = d[12], e = d[2], f = cljs.core.get.call(null, 
+      e, "\ufdd0:exclude-color"), e = cljs.core.get.call(null, e, "\ufdd0:dot-chain"), g = 1 < cljs.core.count.call(null, e), d[13] = f, d[12] = e, d[1] = cljs.core.truth_(g) ? 12 : 13, "\ufdd0:recur") : 12 === e ? (f = d[13], h = d[12], e = d[8], g = dots.core.render_remove_dots.call(null, e, h), e = e.call(null, "\ufdd0:score"), h = cljs.core.set.call(null, h), h = cljs.core.count.call(null, h), e = cljs.core.assoc.call(null, g, "\ufdd0:score", e + h, "\ufdd0:exclude-color", f), d[2] = e, d[1] = 
+      14, "\ufdd0:recur") : 13 === e ? (e = d[8], d[2] = e, d[1] = 14, "\ufdd0:recur") : 14 === e ? (e = d[2], d[5] = e, d[2] = null, d[1] = 2, "\ufdd0:recur") : null
+    }, f = null, g = function() {
+      var a = Array(14);
+      a[0] = f;
+      a[1] = 1;
+      return a
+    }, h = function(a) {
+      for(;;) {
+        var b = e.call(null, a);
+        if("\ufdd0:recur" !== b) {
+          return b
+        }
+      }
+    }, f = function(a) {
+      switch(arguments.length) {
+        case 0:
+          return g.call(this);
+        case 1:
+          return h.call(this, a)
+      }
+      throw Error("Invalid arity: " + arguments.length);
+    };
+    f.cljs$core$IFn$_invoke$arity$0 = g;
+    f.cljs$core$IFn$_invoke$arity$1 = h;
+    var i = f.call(null);
+    i[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = d;
+    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, i)
+  });
+  return d
+};
+dots.core.render_screen = function(a) {
+  a = crate.core.html.call(null, a);
+  return jayq.core.inner.call(null, jayq.core.$.call(null, ".dots-game-container"), a)
+};
+dots.core.app_loop = function() {
+  var a = dots.core.draw_chan.call(null, "body"), b = dots.core.click_chan.call(null, ".dots-game .start-new-game", "\ufdd0:start-new-game"), c = cljs.core.async.chan.call(null, 1);
+  cljs.core.async.impl.dispatch.run.call(null, function() {
+    var d = function(c) {
+      var d = c[1];
+      if(9 === d) {
+        return c[5] = c[2], c[2] = null, c[1] = 3, "\ufdd0:recur"
+      }
+      if(8 === d) {
+        var d = cljs.core.get.call(null, c[2], "\ufdd0:score"), d = dots.core.score_screen.call(null, d), d = dots.core.render_screen.call(null, d), e = cljs.core.vector.call(null, b, a), e = dots.core.select_chan.call(null, function(a) {
+          return cljs.core._EQ_.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0:start-new-game"], !0), a)
+        }, e);
+        c[6] = d;
+        return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, c, 9, e)
+      }
+      return 7 === d ? (d = c[7], c[2] = d, c[1] = 8, "\ufdd0:recur") : 6 === d ? (d = c[7], d = cljs.core.apply.call(null, cljs.core.hash_map, d), c[2] = d, c[1] = 8, "\ufdd0:recur") : 5 === d ? (d = c[7], d = c[2], e = cljs.core.seq_QMARK_.call(null, d), c[7] = d, c[1] = e ? 6 : 7, "\ufdd0:recur") : 4 === d ? (d = c[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)) : 3 === d ? (d = dots.core.setup_game_state.call(null), d = dots.core.game_loop.call(null, d, a), cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, 
+      c, 5, d)) : 2 === d ? (c[8] = c[2], c[2] = null, c[1] = 3, "\ufdd0:recur") : 1 === d ? (d = dots.core.start_screen.call(null), d = dots.core.render_screen.call(null, d), e = cljs.core.vector.call(null, b, a), e = dots.core.select_chan.call(null, function(a) {
+        return cljs.core._EQ_.call(null, cljs.core.PersistentVector.fromArray(["\ufdd0:start-new-game"], !0), a)
+      }, e), c[9] = d, cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, c, 2, e)) : null
+    }, e = null, f = function() {
+      var a = Array(10);
+      a[0] = e;
+      a[1] = 1;
+      return a
+    }, g = function(a) {
+      for(;;) {
+        var b = d.call(null, a);
+        if("\ufdd0:recur" !== b) {
+          return b
+        }
+      }
+    }, e = function(a) {
+      switch(arguments.length) {
+        case 0:
+          return f.call(this);
+        case 1:
+          return g.call(this, a)
+      }
+      throw Error("Invalid arity: " + arguments.length);
+    };
+    e.cljs$core$IFn$_invoke$arity$0 = f;
+    e.cljs$core$IFn$_invoke$arity$1 = g;
+    var h = e.call(null);
+    h[cljs.core.async.impl.ioc_helpers.USER_START_IDX] = c;
+    return cljs.core.async.impl.ioc_helpers.run_state_machine.call(null, h)
   });
   return c
 };
@@ -19415,7 +19256,7 @@ dots.anim.get_bounce = function(a, b) {
   }, c), d), cljs.core.PersistentVector.fromArray([cljs.core.PersistentVector.fromArray([100, b], !0)], !0))
 };
 dots.anim.translate_y = function(a) {
-  return[cljs.core.str("-webkit-transform: translate3d(0,"), cljs.core.str(a), cljs.core.str("px,0);")].join("")
+  return[cljs.core.str("-webkit-transform: translate3d(0,"), cljs.core.str(a), cljs.core.str("px,0);"), cljs.core.str("-moz-transform: translate(0,"), cljs.core.str(a), cljs.core.str("px);"), cljs.core.str("-ms-transform: translate(0,"), cljs.core.str(a), cljs.core.str("px);")].join("")
 };
 dots.anim.frame = function(a, b) {
   var c = cljs.core.nth.call(null, b, 0, null), d = cljs.core.nth.call(null, b, 1, null);
@@ -19425,7 +19266,8 @@ dots.anim.frames = function(a, b) {
   return clojure.string.join.call(null, "\n", cljs.core.map_indexed.call(null, dots.anim.frame, dots.anim.get_bounce.call(null, a, b)))
 };
 dots.anim.anim_template = function(a, b, c) {
-  return[cljs.core.str("."), cljs.core.str(a), cljs.core.str(" {\n"), cljs.core.str("-webkit-transform: translate3d(0,"), cljs.core.str(c), cljs.core.str("px,0);\n"), cljs.core.str("-webkit-animation-name: "), cljs.core.str(a), cljs.core.str(";\n"), cljs.core.str("}\n"), cljs.core.str("@-webkit-keyframes "), cljs.core.str(cljs.core.name.call(null, a)), cljs.core.str("{\n"), cljs.core.str(dots.anim.frames.call(null, b, c)), cljs.core.str("\n}\n")].join("")
+  return[cljs.core.str("."), cljs.core.str(a), cljs.core.str(" {\n"), cljs.core.str("-ms-transform: translate(0,"), cljs.core.str(c), cljs.core.str("px);\n"), cljs.core.str("-moz-transform: translate(0,"), cljs.core.str(c), cljs.core.str("px);\n"), cljs.core.str("-webkit-transform: translate3d(0,"), cljs.core.str(c), cljs.core.str("px,0);\n"), cljs.core.str("-webkit-animation-name: "), cljs.core.str(a), cljs.core.str(";\n"), cljs.core.str("}\n"), cljs.core.str("@-webkit-keyframes "), cljs.core.str(cljs.core.name.call(null, 
+  a)), cljs.core.str("{\n"), cljs.core.str(dots.anim.frames.call(null, b, c)), cljs.core.str("\n}\n")].join("")
 };
 dots.anim.create_anim = function(a, b, c, d) {
   var e = function(a) {

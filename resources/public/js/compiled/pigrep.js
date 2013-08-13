@@ -3113,10 +3113,6 @@ cljs.core._reduce.array = function(a, b) {
 cljs.core._reduce.array = function(a, b, c) {
   return cljs.core.array_reduce.call(null, a, b, c)
 };
-cljs.core.ICounted.array = !0;
-cljs.core._count.array = function(a) {
-  return a.length
-};
 cljs.core.RSeq = function(a, b, c) {
   this.ci = a;
   this.i = b;
@@ -3244,7 +3240,14 @@ cljs.core.accumulating_seq_count = function(a) {
   }
 };
 cljs.core.count = function(a) {
-  return cljs.core.counted_QMARK_.call(null, a) ? cljs.core._count.call(null, a) : cljs.core.accumulating_seq_count.call(null, a)
+  if(null != a) {
+    var b;
+    a ? (b = (b = a.cljs$lang$protocol_mask$partition0$ & 2) ? b : a.cljs$core$ICounted$, b = b ? !0 : !1) : b = !1;
+    a = b ? cljs.core._count.call(null, a) : a instanceof Array ? a.length : cljs.core.string_QMARK_.call(null, a) ? a.length : cljs.core.type_satisfies_.call(null, cljs.core.ICounted, a) ? cljs.core._count.call(null, a) : cljs.core.accumulating_seq_count.call(null, a)
+  }else {
+    a = 0
+  }
+  return a
 };
 cljs.core.linear_traversal_nth = function() {
   var a = null, b = function(a, b) {
@@ -3300,13 +3303,13 @@ cljs.core.linear_traversal_nth = function() {
 cljs.core.nth = function() {
   var a = null, b = function(a, b) {
     var c;
-    null == a ? c = null : (a ? (c = (c = a.cljs$lang$protocol_mask$partition0$ & 16) ? c : a.cljs$core$IIndexed$, c = c ? !0 : !1) : c = !1, c = c ? cljs.core._nth.call(null, a, Math.floor(b)) : a instanceof Array ? b < a.length ? a[b] : null : cljs.core.string_QMARK_.call(null, a) ? b < a.length ? a[b] : null : cljs.core.linear_traversal_nth.call(null, a, Math.floor(b)));
+    null == a ? c = null : (a ? (c = (c = a.cljs$lang$protocol_mask$partition0$ & 16) ? c : a.cljs$core$IIndexed$, c = c ? !0 : !1) : c = !1, c = c ? cljs.core._nth.call(null, a, Math.floor(b)) : a instanceof Array ? b < a.length ? a[b] : null : cljs.core.string_QMARK_.call(null, a) ? b < a.length ? a[b] : null : cljs.core.type_satisfies_.call(null, cljs.core.IIndexed, a) ? cljs.core._nth.call(null, a, b) : cljs.core.linear_traversal_nth.call(null, a, Math.floor(b)));
     return c
   }, c = function(a, b, c) {
     if(null != a) {
       var g;
       a ? (g = (g = a.cljs$lang$protocol_mask$partition0$ & 16) ? g : a.cljs$core$IIndexed$, g = g ? !0 : !1) : g = !1;
-      a = g ? cljs.core._nth.call(null, a, Math.floor(b), c) : a instanceof Array ? b < a.length ? a[b] : c : cljs.core.string_QMARK_.call(null, a) ? b < a.length ? a[b] : c : cljs.core.linear_traversal_nth.call(null, a, Math.floor(b), c)
+      a = g ? cljs.core._nth.call(null, a, Math.floor(b), c) : a instanceof Array ? b < a.length ? a[b] : c : cljs.core.string_QMARK_.call(null, a) ? b < a.length ? a[b] : c : cljs.core.type_satisfies_.call(null, cljs.core.IIndexed, a) ? cljs.core._nth.call(null, a, b) : cljs.core.linear_traversal_nth.call(null, a, Math.floor(b), c)
     }else {
       a = c
     }
@@ -3438,22 +3441,22 @@ cljs.core.with_meta = function with_meta(b, c) {
   var d = cljs.core.fn_QMARK_.call(null, b);
   d && (d = b ? ((d = b.cljs$lang$protocol_mask$partition0$ & 262144) ? d : b.cljs$core$IWithMeta$) || (b.cljs$lang$protocol_mask$partition0$ ? 0 : cljs.core.type_satisfies_.call(null, cljs.core.IWithMeta, b)) : cljs.core.type_satisfies_.call(null, cljs.core.IWithMeta, b), d = !d);
   return d ? with_meta.call(null, function() {
-    if(void 0 === cljs.core.t3510) {
-      cljs.core.t3510 = {};
-      cljs.core.t3510 = function(b, c, d, e) {
+    if(void 0 === cljs.core.t6315) {
+      cljs.core.t6315 = {};
+      cljs.core.t6315 = function(b, c, d, e) {
         this.meta = b;
         this.o = c;
         this.with_meta = d;
-        this.meta3511 = e;
+        this.meta6316 = e;
         this.cljs$lang$protocol_mask$partition1$ = 0;
         this.cljs$lang$protocol_mask$partition0$ = 393217
       };
-      cljs.core.t3510.cljs$lang$type = !0;
-      cljs.core.t3510.cljs$lang$ctorStr = "cljs.core/t3510";
-      cljs.core.t3510.cljs$lang$ctorPrWriter = function(b, c) {
-        return cljs.core._write.call(null, c, "cljs.core/t3510")
+      cljs.core.t6315.cljs$lang$type = !0;
+      cljs.core.t6315.cljs$lang$ctorStr = "cljs.core/t6315";
+      cljs.core.t6315.cljs$lang$ctorPrWriter = function(b, c) {
+        return cljs.core._write.call(null, c, "cljs.core/t6315")
       };
-      var d = cljs.core.t3510.prototype, f = function(b, c) {
+      var d = cljs.core.t6315.prototype, f = function(b, c) {
         return cljs.core.apply.call(null, b.o, c)
       }, g = function(b, c) {
         var b = this, d = null;
@@ -3467,22 +3470,22 @@ cljs.core.with_meta = function with_meta(b, c) {
       };
       g.cljs$core$IFn$_invoke$arity$variadic = f;
       d.call = g;
-      cljs.core.t3510.prototype.apply = function(b, c) {
+      cljs.core.t6315.prototype.apply = function(b, c) {
         b = this;
         return b.call.apply(b, [b].concat(c.slice()))
       };
-      cljs.core.t3510.prototype.cljs$core$Fn$ = !0;
-      cljs.core.t3510.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
-        return this.meta3511
+      cljs.core.t6315.prototype.cljs$core$Fn$ = !0;
+      cljs.core.t6315.prototype.cljs$core$IMeta$_meta$arity$1 = function() {
+        return this.meta6316
       };
-      cljs.core.t3510.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
-        return new cljs.core.t3510(this.meta, this.o, this.with_meta, c)
+      cljs.core.t6315.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
+        return new cljs.core.t6315(this.meta, this.o, this.with_meta, c)
       };
-      cljs.core.__GT_t3510 = function(b, c, d, e) {
-        return new cljs.core.t3510(b, c, d, e)
+      cljs.core.__GT_t6315 = function(b, c, d, e) {
+        return new cljs.core.t6315(b, c, d, e)
       }
     }
-    return new cljs.core.t3510(c, b, with_meta, null)
+    return new cljs.core.t6315(c, b, with_meta, null)
   }(), c) : cljs.core._with_meta.call(null, b, c)
 };
 cljs.core.meta = function(a) {
@@ -3640,8 +3643,11 @@ cljs.core.vector_QMARK_ = function(a) {
   return cljs.core.type_satisfies_.call(null, cljs.core.IVector, a)
 };
 cljs.core.chunked_seq_QMARK_ = function(a) {
-  var b = a instanceof cljs.core.ChunkedCons;
-  return b ? b : a instanceof cljs.core.ChunkedSeq
+  if(a) {
+    var b = a.cljs$lang$protocol_mask$partition1$ & 512, a = b ? b : a.cljs$core$IChunkedSeq$;
+    return a ? !0 : !1
+  }
+  return!1
 };
 cljs.core.js_obj = function() {
   var a = null, b = function(a) {
@@ -5326,10 +5332,6 @@ cljs.core.list_QMARK_ = function(a) {
     return b ? !0 : a.cljs$lang$protocol_mask$partition0$ ? !1 : cljs.core.type_satisfies_.call(null, cljs.core.IList, a)
   }
   return cljs.core.type_satisfies_.call(null, cljs.core.IList, a)
-};
-cljs.core.ICounted.string = !0;
-cljs.core._count.string = function(a) {
-  return a.length
 };
 cljs.core.IHash.string = !0;
 cljs.core._hash.string = function(a) {
@@ -8007,7 +8009,7 @@ cljs.core.ChunkedSeq = function(a, b, c, d, e, f) {
   this.off = d;
   this.meta = e;
   this.__hash = f;
-  this.cljs$lang$protocol_mask$partition0$ = 31719660;
+  this.cljs$lang$protocol_mask$partition0$ = 32243948;
   this.cljs$lang$protocol_mask$partition1$ = 1536
 };
 cljs.core.ChunkedSeq.cljs$lang$type = !0;
@@ -8027,6 +8029,12 @@ cljs.core.ChunkedSeq.prototype.cljs$core$ICollection$_conj$arity$2 = function(a,
 };
 cljs.core.ChunkedSeq.prototype.toString = function() {
   return cljs.core.pr_str_STAR_.call(null, this)
+};
+cljs.core.ChunkedSeq.prototype.cljs$core$IReduce$_reduce$arity$2 = function(a, b) {
+  return cljs.core.ci_reduce.call(null, cljs.core.subvec.call(null, this.vec, this.i + this.off, cljs.core.count.call(null, this.vec)), b)
+};
+cljs.core.ChunkedSeq.prototype.cljs$core$IReduce$_reduce$arity$3 = function(a, b, c) {
+  return cljs.core.ci_reduce.call(null, cljs.core.subvec.call(null, this.vec, this.i + this.off, cljs.core.count.call(null, this.vec)), b, c)
 };
 cljs.core.ChunkedSeq.prototype.cljs$core$ISeqable$_seq$arity$1 = function(a) {
   return a
@@ -8111,8 +8119,11 @@ cljs.core.Subvec.prototype.cljs$core$ILookup$_lookup$arity$3 = function(a, b, c)
   return a.cljs$core$IIndexed$_nth$arity$3(a, b, c)
 };
 cljs.core.Subvec.prototype.cljs$core$IAssociative$_assoc$arity$3 = function(a, b, c) {
-  a = this.start + b;
-  return cljs.core.build_subvec.call(null, this.meta, cljs.core.assoc.call(null, this.v, a, c), this.start, this.end > a + 1 ? this.end : a + 1, null)
+  var d = this, e = d.start + b;
+  return cljs.core.build_subvec.call(null, d.meta, cljs.core.assoc.call(null, d.v, e, c), d.start, function() {
+    var a = d.end, b = e + 1;
+    return a > b ? a : b
+  }(), null)
 };
 cljs.core.Subvec.prototype.call = function() {
   var a = null;
