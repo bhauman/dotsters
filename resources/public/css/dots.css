@@ -91,23 +91,23 @@
 }
 
 .blue {
-   background: transparent url(/images/geo_sprite.png) no-repeat -48px -1px;
+   background: transparent url(../images/geo_sprite.png) no-repeat -48px -1px;
 }
 
 .green {
-   background: transparent url(/images/geo_sprite.png) no-repeat -24px -1px;
+   background: transparent url(../images/geo_sprite.png) no-repeat -24px -1px;
 }
 
 .purple {
-   background: transparent url(/images/geo_sprite.png) no-repeat -96px -1px;
+   background: transparent url(../images/geo_sprite.png) no-repeat -96px -1px;
 }
 
 .yellow {
-   background: transparent url(/images/geo_sprite.png) no-repeat 0px -1px;
+   background: transparent url(../images/geo_sprite.png) no-repeat 0px -1px;
 }
 
 .red {
-   background: transparent url(/images/geo_sprite.png) no-repeat -72px -1px;
+   background: transparent url(../images/geo_sprite.png) no-repeat -72px -1px;
 }
 
 .dots-game .chain-line .line.blue {
@@ -291,27 +291,27 @@
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
 .blue {
-   background: transparent url(/images/geo_sprite@2x.png) no-repeat -48px -1px;
+   background: transparent url(../images/geo_sprite@2x.png) no-repeat -48px -1px;
    background-size: 118px;
 }
 
 .green {
-   background: transparent url(/images/geo_sprite@2x.png) no-repeat -24px -1px;
+   background: transparent url(../images/geo_sprite@2x.png) no-repeat -24px -1px;
    background-size: 118px;
 }
 
 .purple {
-   background: transparent url(/images/geo_sprite@2x.png) no-repeat -96px -1px;
+   background: transparent url(../images/geo_sprite@2x.png) no-repeat -96px -1px;
    background-size: 118px;
 }
 
 .yellow {
-   background: transparent url(/images/geo_sprite@2x.png) no-repeat 0px -1px;
+   background: transparent url(../images/geo_sprite@2x.png) no-repeat 0px -1px;
    background-size: 118px;
 }
 
 .red {
-   background: transparent url(/images/geo_sprite@2x.png) no-repeat -72px -1px;
+   background: transparent url(../images/geo_sprite@2x.png) no-repeat -72px -1px;
    background-size: 118px;
 }
 }
