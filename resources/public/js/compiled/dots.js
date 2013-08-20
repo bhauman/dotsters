@@ -18583,9 +18583,9 @@ dots.core.draw_chan = function(a) {
       }
       if(2 === d) {
         var d = a[2], e = cljs.core.nth.call(null, d, 0, null), f = cljs.core.nth.call(null, d, 1, null);
+        a[9] = f;
+        a[10] = e;
         a[5] = d;
-        a[9] = e;
-        a[10] = f;
         a[2] = null;
         a[1] = 3;
         return"\ufdd0:recur"
@@ -18625,7 +18625,7 @@ dots.core.offscreen_dot_position = 8;
 dots.core.board_size = 6;
 dots.core.number_colors = cljs.core.count.call(null, dots.core.dot_colors);
 dots.core.grid_unit_size = 45;
-dots.core.dot_size = 20;
+dots.core.dot_size = 22;
 dots.core.corner_offset = dots.core.grid_unit_size - dots.core.dot_size;
 dots.core.rand_colors = function(a) {
   jayq.util.log.call(null, "getting colors", cljs.core.prn_str.call(null, a));
@@ -18661,7 +18661,7 @@ dots.core.colorize_word = function(a) {
   }, a, dots.core.rand_colors.call(null))
 };
 dots.core.start_screen = function() {
-  return cljs.core.PersistentVector.fromArray(["\ufdd0:div.dots-game", cljs.core.PersistentVector.fromArray(["\ufdd0:div.notice-square", cljs.core.PersistentVector.fromArray(["\ufdd0:div.marq", dots.core.colorize_word.call(null, "DOTSTERS")], !0), cljs.core.PersistentVector.fromArray(["\ufdd0:div.control-area", cljs.core.PersistentVector.fromArray(["\ufdd0:a.start-new-game", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:href", "#"], !0), "new game"], !0)], !0)], !0)], !0)
+  return cljs.core.PersistentVector.fromArray(["\ufdd0:div.dots-game", cljs.core.PersistentVector.fromArray(["\ufdd0:div.notice-square", cljs.core.PersistentVector.fromArray(["\ufdd0:div.marq", dots.core.colorize_word.call(null, "SHAPES")], !0), cljs.core.PersistentVector.fromArray(["\ufdd0:div.control-area", cljs.core.PersistentVector.fromArray(["\ufdd0:a.start-new-game", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:href", "#"], !0), "new game"], !0)], !0)], !0)], !0)
 };
 dots.core.score_screen = function(a) {
   return cljs.core.PersistentVector.fromArray(["\ufdd0:div.dots-game", cljs.core.PersistentVector.fromArray(["\ufdd0:div.notice-square", cljs.core.PersistentVector.fromArray(["\ufdd0:div.marq", cljs.core.concat.call(null, dots.core.colorize_word.call(null, "SCORE"), cljs.core.PersistentVector.fromArray([cljs.core.PersistentVector.fromArray(["\ufdd0:span", " "], !0)], !0), dots.core.colorize_word.call(null, "" + cljs.core.str(a)))], !0), cljs.core.PersistentVector.fromArray(["\ufdd0:div.control-area", 
@@ -18699,8 +18699,8 @@ dots.core.remove_dot = function(a) {
       if(1 === c) {
         var c = jayq.core.$.call(null, b), d = dots.core.top_pos_from_dot_elem.call(null, c), d = dots.core.reverse_board_position.call(null, d), e = dots.core.pos__GT_coord.call(null, d), f = dots.core.translate_top.call(null, e), d = cljs.core.hash_map.call(null, "-webkit-transition", "all 0.2s"), d = jayq.core.css.call(null, c, d), f = [cljs.core.str(f), cljs.core.str(" scale3d(0.1,0.1,0.1)")].join(""), g = dots.core.offscreen_offset + e, g = [cljs.core.str("translate(0,"), cljs.core.str(g), cljs.core.str("px) scale(0.1,0.1)")].join(""), 
         e = dots.core.offscreen_offset + e, e = [cljs.core.str("translate(0,"), cljs.core.str(e), cljs.core.str("px) scale(0.1,0.1)")].join(""), e = cljs.core.hash_map.call(null, "-webkit-transform", f, "-moz-transform", g, "-ms-transform", e), c = jayq.core.css.call(null, c, e), e = cljs.core.async.timeout.call(null, 150);
-        a[6] = d;
-        a[7] = c;
+        a[6] = c;
+        a[7] = d;
         return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, a, 2, e)
       }
       return null
@@ -18748,7 +18748,7 @@ dots.core.update_dot = function(a, b) {
           var d = c[5], e = c[2], f = cljs.core.last.call(null, b), f = dots.core.reverse_board_position.call(null, f), e = [cljs.core.str("level-"), cljs.core.str(f), cljs.core.str(e)].join(""), d = d.addClass(e);
           return cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)
         }
-        return 3 === d ? (c[2] = "", c[1] = 4, "\ufdd0:recur") : 2 === d ? (d = dots.core.reverse_board_position.call(null, c[6]), d = [cljs.core.str("-from"), cljs.core.str(d)].join(""), c[2] = d, c[1] = 4, "\ufdd0:recur") : 1 === d ? (d = a.call(null, "\ufdd0:elem"), d = jayq.core.$.call(null, d), e = dots.core.top_pos_from_dot_elem.call(null, d), c[5] = d, c[6] = e, c[1] = cljs.core.truth_(e) ? 2 : 3, "\ufdd0:recur") : null
+        return 3 === d ? (c[2] = "", c[1] = 4, "\ufdd0:recur") : 2 === d ? (d = dots.core.reverse_board_position.call(null, c[6]), d = [cljs.core.str("-from"), cljs.core.str(d)].join(""), c[2] = d, c[1] = 4, "\ufdd0:recur") : 1 === d ? (d = a.call(null, "\ufdd0:elem"), d = jayq.core.$.call(null, d), e = dots.core.top_pos_from_dot_elem.call(null, d), c[6] = e, c[5] = d, c[1] = cljs.core.truth_(e) ? 2 : 3, "\ufdd0:recur") : null
       }, e = null, f = function() {
         var a = Array(7);
         a[0] = e;
@@ -18821,9 +18821,10 @@ dots.core.dot_follows_QMARK_ = function(a, b, c) {
   return d ? (d = null == b) ? d : (a = cljs.core._EQ_.call(null, dots.core.dot_color.call(null, a, b), dots.core.dot_color.call(null, a, c))) ? cljs.core._EQ_.call(null, 1, cljs.core.apply.call(null, cljs.core._PLUS_, cljs.core.mapv.call(null, cljs.core.comp.call(null, dots.core.abs, cljs.core._), c, b))) : a : d
 };
 dots.core.chain_element_templ = function(a, b, c) {
-  var d = dots.core.pos__GT_center_coord.call(null, a), a = cljs.core.nth.call(null, d, 0, null), d = cljs.core.nth.call(null, d, 1, null), e = dots.core.pos__GT_center_coord.call(null, b), b = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), f = cljs.core._EQ_.call(null, d, e) ? cljs.core.PersistentVector.fromArray([5, dots.core.grid_unit_size], !0) : cljs.core.PersistentVector.fromArray([dots.core.grid_unit_size, 5], !0), g = cljs.core.nth.call(null, f, 0, null), 
-  f = cljs.core.nth.call(null, f, 1, null), a = [cljs.core.str("width: "), cljs.core.str(g), cljs.core.str("px;"), cljs.core.str("height: "), cljs.core.str(f), cljs.core.str("px;"), cljs.core.str("top: "), cljs.core.str((a < b ? a : b) - 2), cljs.core.str("px;"), cljs.core.str("left: "), cljs.core.str((d < e ? d : e) - 2), cljs.core.str("px;")].join("");
-  return cljs.core.PersistentVector.fromArray(["\ufdd0:div", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:style", a, "\ufdd0:class", [cljs.core.str("line "), cljs.core.str(cljs.core.name.call(null, cljs.core.truth_(c) ? c : "\ufdd0:blue"))].join("")], !0)], !0)
+  var d = dots.core.pos__GT_center_coord.call(null, a), a = cljs.core.nth.call(null, d, 0, null), d = cljs.core.nth.call(null, d, 1, null), e = dots.core.pos__GT_center_coord.call(null, b), b = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), f = dots.core.grid_unit_size - dots.core.dot_size, g = cljs.core._EQ_.call(null, d, e), h = g ? cljs.core.PersistentVector.fromArray([4, f], !0) : cljs.core.PersistentVector.fromArray([f, 4], !0), f = cljs.core.nth.call(null, h, 
+  0, null), h = cljs.core.nth.call(null, h, 1, null), i = g ? cljs.core.PersistentVector.fromArray([-3, 11], !0) : cljs.core.PersistentVector.fromArray([11, -3], !0), g = cljs.core.nth.call(null, i, 0, null), i = cljs.core.nth.call(null, i, 1, null), a = [cljs.core.str("width: "), cljs.core.str(f), cljs.core.str("px;"), cljs.core.str("height: "), cljs.core.str(h), cljs.core.str("px;"), cljs.core.str("top: "), cljs.core.str((a < b ? a : b) + i), cljs.core.str("px;"), cljs.core.str("left: "), cljs.core.str((d < 
+  e ? d : e) + g), cljs.core.str("px;")].join("");
+  return cljs.core.PersistentVector.fromArray(["\ufdd0:div", cljs.core.PersistentArrayMap.fromArray(["\ufdd0:style", a, "\ufdd0:class", [cljs.core.str("line "), cljs.core.str(cljs.core.name.call(null, cljs.core.truth_(c) ? c : "\ufdd0:blue")), cljs.core.str(f < h ? " vert" : " horiz")].join("")], !0)], !0)
 };
 dots.core.dot_highlight_templ = function(a, b) {
   var c = dots.core.pos__GT_corner_coord.call(null, a), d = cljs.core.nth.call(null, c, 0, null), c = cljs.core.nth.call(null, c, 1, null), d = [cljs.core.str("top:"), cljs.core.str(d), cljs.core.str("px; left: "), cljs.core.str(c), cljs.core.str("px;")].join("");
@@ -18892,9 +18893,8 @@ dots.core.get_dots_to_remove = function(a, b) {
         return d = c[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)
       }
       if(4 === d) {
-        d = c[5];
+        var f = c[8], d = c[5];
         e = c[6];
-        var f = c[8];
         e = (new cljs.core.Keyword("\ufdd0:dot-chain")).call(null, d);
         e = cljs.core.first.call(null, e);
         d = dots.core.dot_color.call(null, d, e);
@@ -18915,19 +18915,19 @@ dots.core.get_dots_to_remove = function(a, b) {
         return d = c[2], c[2] = d, c[1] = 3, "\ufdd0:recur"
       }
       if(7 === d) {
-        d = c[5];
         f = c[8];
+        d = c[5];
         e = c[2];
         var g = dots.core.flash_color_off.call(null, f), h = dots.core.erase_dot_chain.call(null), p = dots.core.dot_positions_for_focused_color.call(null, d), d = cljs.core.assoc.call(null, d, "\ufdd0:dot-chain", p, "\ufdd0:exclude-color", f);
-        c[10] = h;
+        c[10] = e;
         c[11] = g;
-        c[12] = e;
+        c[12] = h;
         c[2] = d;
         c[1] = 6;
         return"\ufdd0:recur"
       }
-      return 8 === d ? (e = c[2], d = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), d = cljs.core._EQ_.call(null, d, "\ufdd0:drawend"), c[13] = e, c[1] = d ? 9 : 10, "\ufdd0:recur") : 9 === d ? (d = c[5], e = dots.core.erase_dot_chain.call(null), c[14] = e, c[2] = d, c[1] = 11, "\ufdd0:recur") : 10 === d ? (e = c[15], e = c[13], d = c[5], d = d.call(null, "\ufdd0:dot-index").call(null, e), c[15] = d, c[1] = cljs.core.truth_(d) ? 12 : 13, "\ufdd0:recur") : 11 === 
-      d ? (d = c[2], c[2] = d, c[1] = 6, "\ufdd0:recur") : 12 === d ? (e = c[15], d = c[5], e = dots.core.transition_dot_chain_state.call(null, d, e), d = cljs.core.assoc.call(null, d, "\ufdd0:dot-chain", e), c[2] = d, c[1] = 14, "\ufdd0:recur") : 13 === d ? (d = c[5], c[2] = d, c[1] = 14, "\ufdd0:recur") : 14 === d ? (d = c[5], e = c[2], c[5] = e, c[6] = d, c[2] = null, c[1] = 2, "\ufdd0:recur") : null
+      return 8 === d ? (e = c[2], d = cljs.core.nth.call(null, e, 0, null), e = cljs.core.nth.call(null, e, 1, null), d = cljs.core._EQ_.call(null, d, "\ufdd0:drawend"), c[13] = e, c[1] = d ? 9 : 10, "\ufdd0:recur") : 9 === d ? (d = c[5], e = dots.core.erase_dot_chain.call(null), c[14] = e, c[2] = d, c[1] = 11, "\ufdd0:recur") : 10 === d ? (e = c[13], d = c[5], g = c[15], d = d.call(null, "\ufdd0:dot-index").call(null, e), c[15] = d, c[1] = cljs.core.truth_(d) ? 12 : 13, "\ufdd0:recur") : 11 === 
+      d ? (d = c[2], c[2] = d, c[1] = 6, "\ufdd0:recur") : 12 === d ? (d = c[5], g = c[15], e = dots.core.transition_dot_chain_state.call(null, d, g), d = cljs.core.assoc.call(null, d, "\ufdd0:dot-chain", e), c[2] = d, c[1] = 14, "\ufdd0:recur") : 13 === d ? (d = c[5], c[2] = d, c[1] = 14, "\ufdd0:recur") : 14 === d ? (d = c[5], e = c[2], c[5] = e, c[6] = d, c[2] = null, c[1] = 2, "\ufdd0:recur") : null
     }, e = null, f = function() {
       var a = Array(16);
       a[0] = e;
@@ -19006,16 +19006,16 @@ dots.core.render_position_updates_helper = function(a, b) {
       var d = c[1];
       if(1 === d) {
         var e = cljs.core.nth.call(null, b, 0, null), f = cljs.core.nthnext.call(null, b, 1), d = b;
-        c[5] = e;
-        c[6] = 0;
-        c[7] = d;
-        c[8] = f;
+        c[5] = 0;
+        c[6] = d;
+        c[7] = f;
+        c[8] = e;
         c[2] = null;
         c[1] = 2;
         return"\ufdd0:recur"
       }
-      return 2 === d ? (e = c[9], d = c[7], f = cljs.core.nth.call(null, d, 0, null), e = cljs.core.nthnext.call(null, d, 1), d = cljs.core.not.call(null, null == f), c[9] = f, c[10] = e, c[1] = d ? 4 : 5, "\ufdd0:recur") : 3 === d ? (d = c[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)) : 4 === d ? (e = c[9], d = c[6], d = cljs.core.vector.call(null, a, d), d = dots.core.at_correct_postion_QMARK_.call(null, e, d), d = cljs.core.not.call(null, d), c[1] = d ? 7 : 8, "\ufdd0:recur") : 
-      5 === d ? (c[2] = null, c[1] = 6, "\ufdd0:recur") : 6 === d ? (d = c[2], c[2] = d, c[1] = 3, "\ufdd0:recur") : 7 === d ? (d = cljs.core.async.timeout.call(null, 80), cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, c, 10, d)) : 8 === d ? (c[2] = null, c[1] = 9, "\ufdd0:recur") : 9 === d ? (e = c[10], d = c[6], f = c[2], c[6] = d + 1, c[7] = e, c[11] = f, c[2] = null, c[1] = 2, "\ufdd0:recur") : 10 === d ? (e = c[9], d = c[6], f = c[2], d = cljs.core.vector.call(null, a, d), d = dots.core.update_dot.call(null, 
+      return 2 === d ? (e = c[9], d = c[6], f = cljs.core.nth.call(null, d, 0, null), e = cljs.core.nthnext.call(null, d, 1), d = cljs.core.not.call(null, null == f), c[9] = f, c[10] = e, c[1] = d ? 4 : 5, "\ufdd0:recur") : 3 === d ? (d = c[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, c, d)) : 4 === d ? (e = c[9], d = c[5], d = cljs.core.vector.call(null, a, d), d = dots.core.at_correct_postion_QMARK_.call(null, e, d), d = cljs.core.not.call(null, d), c[1] = d ? 7 : 8, "\ufdd0:recur") : 
+      5 === d ? (c[2] = null, c[1] = 6, "\ufdd0:recur") : 6 === d ? (d = c[2], c[2] = d, c[1] = 3, "\ufdd0:recur") : 7 === d ? (d = cljs.core.async.timeout.call(null, 80), cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, c, 10, d)) : 8 === d ? (c[2] = null, c[1] = 9, "\ufdd0:recur") : 9 === d ? (e = c[10], d = c[5], f = c[2], c[11] = f, c[5] = d + 1, c[6] = e, c[2] = null, c[1] = 2, "\ufdd0:recur") : 10 === d ? (e = c[9], d = c[5], f = c[2], d = cljs.core.vector.call(null, a, d), d = dots.core.update_dot.call(null, 
       e, d), c[12] = f, c[2] = d, c[1] = 9, "\ufdd0:recur") : null
     }, e = null, f = function() {
       var a = Array(13);
@@ -19068,8 +19068,8 @@ dots.core.game_timer = function(a) {
       }
       if(6 === c) {
         var c = b[5], d = cljs.core.async.timeout.call(null, 1E3);
-        b[5] = c - 1;
         b[6] = d;
+        b[5] = c - 1;
         b[2] = null;
         b[1] = 2;
         return"\ufdd0:recur"
@@ -19084,11 +19084,11 @@ dots.core.game_timer = function(a) {
         return c = b[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, b, c)
       }
       if(2 === c) {
-        var c = b[5], d = b[6], e = jayq.core.$.call(null, ".time-val"), c = jayq.core.inner.call(null, e, c);
+        var d = b[6], c = b[5], e = jayq.core.$.call(null, ".time-val"), c = jayq.core.inner.call(null, e, c);
         b[8] = c;
         return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, b, 4, d)
       }
-      return 1 === c ? (d = cljs.core.async.timeout.call(null, 1E3), c = a, b[5] = c, b[6] = d, b[2] = null, b[1] = 2, "\ufdd0:recur") : null
+      return 1 === c ? (d = cljs.core.async.timeout.call(null, 1E3), c = a, b[6] = d, b[5] = c, b[2] = null, b[1] = 2, "\ufdd0:recur") : null
     }, d = null, e = function() {
       var a = Array(9);
       a[0] = d;
@@ -19144,9 +19144,9 @@ dots.core.game_loop = function(a, b) {
         d[8] = e;
         return cljs.core.async.impl.ioc_helpers.take_BANG_.call(null, d, 4, h)
       }
-      return 3 === e ? (e = d[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, d, e)) : 4 === e ? (e = d[8], f = d[2], g = dots.core.render_position_updates.call(null, e), e = dots.core.get_dots_to_remove.call(null, b, e), e = cljs.core.vector.call(null, e, c), d[9] = f, d[10] = g, cljs.core.async.impl.ioc_helpers.ioc_alts_BANG_.call(null, d, 5, e)) : 5 === e ? (f = d[2], e = cljs.core.nth.call(null, f, 0, null), f = cljs.core.nth.call(null, f, 1, null), f = cljs.core._EQ_.call(null, f, 
+      return 3 === e ? (e = d[2], cljs.core.async.impl.ioc_helpers.return_chan.call(null, d, e)) : 4 === e ? (e = d[8], f = d[2], g = dots.core.render_position_updates.call(null, e), e = dots.core.get_dots_to_remove.call(null, b, e), e = cljs.core.vector.call(null, e, c), d[9] = g, d[10] = f, cljs.core.async.impl.ioc_helpers.ioc_alts_BANG_.call(null, d, 5, e)) : 5 === e ? (f = d[2], e = cljs.core.nth.call(null, f, 0, null), f = cljs.core.nth.call(null, f, 1, null), f = cljs.core._EQ_.call(null, f, 
       c), d[11] = e, d[1] = f ? 6 : 7, "\ufdd0:recur") : 6 === e ? (e = d[8], d[2] = e, d[1] = 8, "\ufdd0:recur") : 7 === e ? (e = d[11], e = cljs.core.seq_QMARK_.call(null, e), d[1] = e ? 9 : 10, "\ufdd0:recur") : 8 === e ? (e = d[2], d[2] = e, d[1] = 3, "\ufdd0:recur") : 9 === e ? (e = d[11], e = cljs.core.apply.call(null, cljs.core.hash_map, e), d[2] = e, d[1] = 11, "\ufdd0:recur") : 10 === e ? (e = d[11], d[2] = e, d[1] = 11, "\ufdd0:recur") : 11 === e ? (h = d[12], e = d[2], f = cljs.core.get.call(null, 
-      e, "\ufdd0:exclude-color"), e = cljs.core.get.call(null, e, "\ufdd0:dot-chain"), g = 1 < cljs.core.count.call(null, e), d[13] = f, d[12] = e, d[1] = cljs.core.truth_(g) ? 12 : 13, "\ufdd0:recur") : 12 === e ? (f = d[13], h = d[12], e = d[8], g = dots.core.render_remove_dots.call(null, e, h), e = e.call(null, "\ufdd0:score"), h = cljs.core.set.call(null, h), h = cljs.core.count.call(null, h), e = cljs.core.assoc.call(null, g, "\ufdd0:score", e + h, "\ufdd0:exclude-color", f), d[2] = e, d[1] = 
+      e, "\ufdd0:exclude-color"), e = cljs.core.get.call(null, e, "\ufdd0:dot-chain"), g = 1 < cljs.core.count.call(null, e), d[13] = f, d[12] = e, d[1] = cljs.core.truth_(g) ? 12 : 13, "\ufdd0:recur") : 12 === e ? (e = d[8], f = d[13], h = d[12], g = dots.core.render_remove_dots.call(null, e, h), e = e.call(null, "\ufdd0:score"), h = cljs.core.set.call(null, h), h = cljs.core.count.call(null, h), e = cljs.core.assoc.call(null, g, "\ufdd0:score", e + h, "\ufdd0:exclude-color", f), d[2] = e, d[1] = 
       14, "\ufdd0:recur") : 13 === e ? (e = d[8], d[2] = e, d[1] = 14, "\ufdd0:recur") : 14 === e ? (e = d[2], d[5] = e, d[2] = null, d[1] = 2, "\ufdd0:recur") : null
     }, f = null, g = function() {
       var a = Array(14);
