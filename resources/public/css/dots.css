@@ -90,27 +90,23 @@ background-color: #001227;
 }
 
 .blue {
-   background: transparent url(/images/blue_geo.png) no-repeat 0 0;
+   background: transparent url(/images/geo_sprite.png) no-repeat -48px -1px;
 }
 
 .green {
-   background-color: rgb(128,230,121);
-   background: transparent url(/images/green_geo.png) no-repeat 0 0;
+   background: transparent url(/images/geo_sprite.png) no-repeat -24px -1px;
 }
 
 .purple {
-   background-color: rgb(131, 70, 169);
-   background: transparent url(/images/purple_geo.png) no-repeat 0 0;
+   background: transparent url(/images/geo_sprite.png) no-repeat -96px -1px;
 }
 
 .yellow {
-   background-color: rgb(226, 214, 0);
-   background: transparent url(/images/yellow_geo.png) no-repeat 0 -1px;
+   background: transparent url(/images/geo_sprite.png) no-repeat 0px -1px;
 }
 
 .red {
-   background-color: rgb(227, 73, 50);
-   background: transparent url(/images/red_geo.png) no-repeat 0 0;
+   background: transparent url(/images/geo_sprite.png) no-repeat -72px -1px;
 }
 
 .dots-game .chain-line .line.blue {
@@ -188,8 +184,6 @@ background-color: #001227;
 .dots-game .marq span {
    display: inline-block;
    border-radius: 10px;
-   border-width: 1px;
-   border-style: solid;
    padding: 6px;
    margin: 1px;
    width: 15px;
@@ -198,30 +192,41 @@ background-color: #001227;
 }
 
 .dots-game .marq  .blue {
+   border-width: 1px;
+   border-style: solid;
    border-color: rgb(118,172,255);
    color: rgb(118,172,255);
    background-color: rgba(118,172,255, 0.37);
 }
 
 .dots-game .marq .green {
+   border-width: 1px;
+   border-style: solid;
+
    border-color: rgb(128,230,121);
    color: rgb(128,230,121);
    background-color: rgba(128,230,121, 0.37);
 }
 
 .dots-game .marq .purple {
+   border-width: 1px;
+   border-style: solid;
    border-color: rgb(131, 70, 169);
    color: rgb(131, 70, 169);
    background-color: rgba(131, 70, 169, 0.37);
 }
 
 .dots-game .marq .yellow {
+   border-width: 1px;
+   border-style: solid;
    border-color: rgb(226, 214, 0);
    color: rgb(226, 214, 0);
    background-color: rgba(226, 214, 0, 0.37);
 }
 
 .dots-game .marq .red {
+   border-width: 1px;
+   border-style: solid;
    border-color: rgb(227, 73, 50);
    color: rgb(227, 73, 50);
    background-color: rgba(227, 73, 50, 0.37);
@@ -242,7 +247,7 @@ background-color: #001227;
 
 .dots-game a.start-new-game {
    text-decoration: none;
-   border: 2px solid rgb(128,230,121);
+   border: 1px solid rgb(128,230,121);
    background-color: rgba(128,230,121, 0.37);
    color: #fff;
    padding: 10px;
@@ -285,27 +290,27 @@ background-color: #001227;
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
 .blue {
-   background: transparent url(/images/blue_geo@2x.png) no-repeat 0 0;
-   background-size: 22px 22px;
+   background: transparent url(/images/geo_sprite@2x.png) no-repeat -48px -1px;
+   background-size: 118px;
 }
 
 .green {
-   background: transparent url(/images/green_geo@2x.png) no-repeat 0 0;
-   background-size: 22px 22px;
+   background: transparent url(/images/geo_sprite@2x.png) no-repeat -24px -1px;
+   background-size: 118px;
 }
 
 .purple {
-   background: transparent url(/images/purple_geo@2x.png) no-repeat 0 0;
-   background-size: 22px 22px;
+   background: transparent url(/images/geo_sprite@2x.png) no-repeat -96px -1px;
+   background-size: 118px;
 }
 
 .yellow {
-   background: transparent url(/images/yellow_geo@2x.png) no-repeat 0 -1px;
-   background-size: 22px 22px;
+   background: transparent url(/images/geo_sprite@2x.png) no-repeat 0px -1px;
+   background-size: 118px;
 }
 
 .red {
-   background: transparent url(/images/red_geo@2x.png) no-repeat 0 0;
-   background-size: 22px 22px;
+   background: transparent url(/images/geo_sprite@2x.png) no-repeat -72px -1px;
+   background-size: 118px;
 }
 }
