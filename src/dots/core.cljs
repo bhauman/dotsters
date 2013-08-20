@@ -103,7 +103,7 @@
 (defn start-screen []
   [:div.dots-game
    [:div.notice-square
-    [:div.marq (colorize-word "DOTSTERS")]
+    [:div.marq (colorize-word "SHAPES")]
     [:div.control-area
      [:a.start-new-game {:href "#"} "new game"]]]])
 
