@@ -1,5 +1,6 @@
 
 .dots-game {
+   background-color: #001227;
    width: 320px;
    position: relative;
   -webkit-touch-callout: none; 
@@ -34,8 +35,8 @@
 }
 
 .dots-game .board-area {
-  background-color: #001D3F; 
-background-color: #001227;
+   background-color: #001D3F; 
+   background-color: #001227;
    padding-left: 13px;
    padding-top: 13px;
 }
@@ -154,24 +155,24 @@ background-color: #001227;
 }
 
 
-.blue-trans {
-   background-color: rgba(118,172,255,0.8);
+.dots-game .board-area.blue-trans {
+   background-color: rgba(118,172,255,0.5);
 }
 
-.green-trans {
-   background-color: rgba(128,230,121,0.8);
+.dots-game .board-area.green-trans {
+   background-color: rgba(128,230,121,0.5);
 }
 
-.purple-trans {
-   background-color: rgba(131, 70, 169,0.8);
+.dots-game .board-area.purple-trans {
+   background-color: rgba(131, 70, 169,0.5);
 }
 
-.yellow-trans {
-   background-color: rgba(226, 214, 0,0.8);
+.dots-game .board-area.yellow-trans {
+   background-color: rgba(226, 214, 0,0.5);
 }
 
-.red-trans {
-   background-color: rgba(227, 73, 50, 0.8);
+.dots-game .board-area.red-trans {
+   background-color: rgba(227, 73, 50, 0.5);
 }
 
 .dots-game .marq {
