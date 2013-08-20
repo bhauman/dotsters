@@ -69,7 +69,7 @@
 (def board-size 6)
 (def number-colors (count dot-colors))
 (def grid-unit-size 45)
-(def dot-size 20)
+(def dot-size 22)
 (def corner-offset (- grid-unit-size dot-size))
 
 (defn rand-colors [exclude-color]
@@ -199,12 +199,15 @@
 (defn chain-element-templ [last-pos pos color]
   (let [[top1 left1] (pos->center-coord last-pos)
         [top2 left2] (pos->center-coord pos)
-        [width height] (if (= left1 left2) [5 grid-unit-size] [grid-unit-size 5])
+        length (- grid-unit-size dot-size)
+        vertical (= left1 left2)
+        [width height] (if vertical [4 length] [length 4])
+        [off-left off-top] (if vertical [-3 11] [11 -3])        
         style (str "width: " width "px;"
                    "height: " height "px;" 
-                   "top: " (- (min top1 top2) 2) "px;"
-                   "left: " (- (min left1 left2) 2) "px;")]
-    [:div {:style style :class (str "line " (name (or color :blue)))}]))
+                   "top: " (+ (min top1 top2) off-top) "px;"
+                   "left: " (+ (min left1 left2) off-left) "px;")]
+    [:div {:style style :class (str "line " (name (or color :blue)) (if (< width height) " vert" " horiz" ))}]))
 
 (defn dot-highlight-templ [pos color]
   (let [[top left] (pos->corner-coord pos)

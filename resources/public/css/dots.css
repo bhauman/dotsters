@@ -15,13 +15,17 @@
 
 .dots-game .heads {
    background-color: rgb(131, 70, 169);
+   background-color: #001227;
+   border-bottom: 1px solid rgb(118,172,255);
+
    /* background-color: #eee; */
    display: inline-block;
    width: 160px;
    height: 30px;
    padding-top: 13px;
    text-align: center;
-   color: rgba(255,255,255, 0.5);;
+   /* color: rgba(255,255,255, 0.5);;*/
+   color: rgb(118,172,255);
    font-family: helvetica;
 }
 
@@ -30,6 +34,8 @@
 }
 
 .dots-game .board-area {
+  background-color: #001D3F; 
+background-color: #001227;
    padding-left: 13px;
    padding-top: 13px;
 }
@@ -45,7 +51,7 @@
    position: relative;
 }
 
-.dots-game .chain-line .line { 
+.dots-game .chain-line .line {
    position: absolute;
    -webkit-transform: translate3d(0,0,0);
    -moz-transform: translate3d(0,0,0);
@@ -54,9 +60,9 @@
 
 .dots-game .dot {
    position: absolute;
-   width: 20px;
-   height: 20px;
-   border-radius: 10px;
+   width: 22px;
+   height: 22px;
+  /* border-radius: 10px; */
    -ms-transition: all 0.2s;
    -moz-transition: all 0.2s;
    /* -webkit-transition: all 0.2s; 
@@ -69,8 +75,8 @@
 
 .dots-game .dot-highlight {
    position: absolute;
-   width: 20px;
-   height: 20px;
+   width: 22px;
+   height: 22px;
    opacity: 0.0;
    border-radius: 10px;
    -webkit-animation-name: expander;
@@ -84,23 +90,71 @@
 }
 
 .blue {
-   background-color: rgb(118,172,255);
+   background: transparent url(/images/blue_geo.png) no-repeat 0 0;
 }
 
 .green {
    background-color: rgb(128,230,121);
+   background: transparent url(/images/green_geo.png) no-repeat 0 0;
 }
 
 .purple {
    background-color: rgb(131, 70, 169);
+   background: transparent url(/images/purple_geo.png) no-repeat 0 0;
 }
 
 .yellow {
    background-color: rgb(226, 214, 0);
+   background: transparent url(/images/yellow_geo.png) no-repeat 0 -1px;
 }
 
 .red {
    background-color: rgb(227, 73, 50);
+   background: transparent url(/images/red_geo.png) no-repeat 0 0;
+}
+
+.dots-game .chain-line .line.blue {
+   border-color: rgb(118,172,255);
+   background-image: none;
+   background-color: rgba(118,172,255,0.37);
+}
+
+.dots-game .chain-line .line.green {
+   border-color: rgb(128,230,121);
+   background-image: none;
+   background-color: rgba(128,230,121, 0.37);
+}
+
+.dots-game .chain-line .line.purple {
+   border-color: rgb(164, 155, 169);
+   background-image: none;
+   background-color: rgba(164, 155, 169, 0.37);
+}
+
+.dots-game .chain-line .line.yellow {
+   border-color: rgb(226, 214, 0);
+   background-image: none;
+   background-color: rgba(226, 214, 0, 0.37);
+}
+
+.dots-game .chain-line .line.red {
+   border-color: rgb(227, 73, 50);
+   background-image: none;
+   background-color: rgba(227, 73, 50, 0.37);
+}
+
+.dots-game .chain-line .line.vert {
+   border-left-style: solid;
+   border-right-style: solid;
+   border-left-width: 1px;
+   border-right-width: 1px;
+}
+
+.dots-game .chain-line .line.horiz {
+   border-top-style: solid;
+   border-bottom-style: solid;
+   border-top-width: 1px;
+   border-bottom-width: 1px;
 }
 
 
@@ -130,16 +184,51 @@
    font-family: helvetica;
 }
 
+
 .dots-game .marq span {
    display: inline-block;
    border-radius: 10px;
+   border-width: 1px;
+   border-style: solid;
    padding: 6px;
    margin: 1px;
-   width: 17px;
-   height: 17px;
+   width: 15px;
+   height: 15px;
+   background-image: none;
+}
+
+.dots-game .marq  .blue {
+   border-color: rgb(118,172,255);
+   color: rgb(118,172,255);
+   background-color: rgba(118,172,255, 0.37);
+}
+
+.dots-game .marq .green {
+   border-color: rgb(128,230,121);
+   color: rgb(128,230,121);
+   background-color: rgba(128,230,121, 0.37);
+}
+
+.dots-game .marq .purple {
+   border-color: rgb(131, 70, 169);
+   color: rgb(131, 70, 169);
+   background-color: rgba(131, 70, 169, 0.37);
+}
+
+.dots-game .marq .yellow {
+   border-color: rgb(226, 214, 0);
+   color: rgb(226, 214, 0);
+   background-color: rgba(226, 214, 0, 0.37);
+}
+
+.dots-game .marq .red {
+   border-color: rgb(227, 73, 50);
+   color: rgb(227, 73, 50);
+   background-color: rgba(227, 73, 50, 0.37);
 }
 
 .dots-game .notice-square {
+   background-color: #001227;
    padding: 20px;
    height: 250px;
    padding-top: 100px;
@@ -153,7 +242,8 @@
 
 .dots-game a.start-new-game {
    text-decoration: none;
-   background-color: rgb(131,176,249);
+   border: 2px solid rgb(128,230,121);
+   background-color: rgba(128,230,121, 0.37);
    color: #fff;
    padding: 10px;
    border-radius: 10px;
@@ -191,4 +281,31 @@
    body {
       margin: 0px;
    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+.blue {
+   background: transparent url(/images/blue_geo@2x.png) no-repeat 0 0;
+   background-size: 22px 22px;
+}
+
+.green {
+   background: transparent url(/images/green_geo@2x.png) no-repeat 0 0;
+   background-size: 22px 22px;
+}
+
+.purple {
+   background: transparent url(/images/purple_geo@2x.png) no-repeat 0 0;
+   background-size: 22px 22px;
+}
+
+.yellow {
+   background: transparent url(/images/yellow_geo@2x.png) no-repeat 0 -1px;
+   background-size: 22px 22px;
+}
+
+.red {
+   background: transparent url(/images/red_geo@2x.png) no-repeat 0 0;
+   background-size: 22px 22px;
+}
 }
