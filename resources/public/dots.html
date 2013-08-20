@@ -6,6 +6,13 @@
       document.ontouchstart = function(e){ 
         e.preventDefault(); 
        }
+      $(function() {
+         var shapesImage = new Image();   
+         shapesImage.src = "images/geo_sprite.png";
+         var shapesImage2 = new Image();   
+         shapesImage2.src = "images/geo_sprite@2x.png";
+       });
+
     </script>
     <link href="css/dots.css" rel="stylesheet" type="text/css">
     <link href="css/anim.css" rel="stylesheet" type="text/css">
