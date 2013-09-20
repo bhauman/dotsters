@@ -1,7 +1,8 @@
 (ns dots.core
   (:require
+   
    [cljs.core.async :as async
-             :refer [<! >! chan close! sliding-buffer put! alts! timeout]]
+    :refer [<! >! chan close! sliding-buffer put! alts! timeout]]
    [jayq.core :refer [$ append ajax inner css $deferred
                       when done resolve pipe on bind attr
                       offset] :as jq]
@@ -398,5 +399,6 @@
          (render-screen (score-screen score)))
        (<! (select-chan #(= [:start-new-game] %) [start-chan draw-ch]))       
        (recur)))))
+
 
 (app-loop)

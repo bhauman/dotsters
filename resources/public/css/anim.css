@@ -1,21 +1,35 @@
+.dot {
+  visibility: hidden;
+}
+
 .level-0 {
+   visibility: visible;
 -ms-transform: translate(0,135px);
 -moz-transform: translate(0,135px);
 -webkit-transform: translate3d(0,135px,0);
 -webkit-animation-name: level-0;
 }
 @-webkit-keyframes level-0{
-0% { -webkit-transform: translate3d(0,0px,0);-moz-transform: translate(0,0px);-ms-transform: translate(0,0px); -webkit-animation-timing: ease-in;}
-35% { -webkit-transform: translate3d(0,135px,0);-moz-transform: translate(0,135px);-ms-transform: translate(0,135px); -webkit-animation-timing: ease-out;}
-55% { -webkit-transform: translate3d(0,101px,0);-moz-transform: translate(0,101px);-ms-transform: translate(0,101px); -webkit-animation-timing: ease-in;}
-71% { -webkit-transform: translate3d(0,135px,0);-moz-transform: translate(0,135px);-ms-transform: translate(0,135px); -webkit-animation-timing: ease-out;}
-81% { -webkit-transform: translate3d(0,126px,0);-moz-transform: translate(0,126px);-ms-transform: translate(0,126px); -webkit-animation-timing: ease-in;}
-90% { -webkit-transform: translate3d(0,135px,0);-moz-transform: translate(0,135px);-ms-transform: translate(0,135px); -webkit-animation-timing: ease-out;}
-94% { -webkit-transform: translate3d(0,132px,0);-moz-transform: translate(0,132px);-ms-transform: translate(0,132px); -webkit-animation-timing: ease-in;}
-100% { -webkit-transform: translate3d(0,135px,0);-moz-transform: translate(0,135px);-ms-transform: translate(0,135px); -webkit-animation-timing: ease-out;}
+0% { -webkit-transform: translate3d(0,0px,0);-moz-transform: translate(0,0px);-ms-transform: translate(0,0px); -webkit-animation-timing: ease-in;
+}
+35% { -webkit-transform: translate3d(0,135px,0);-moz-transform: translate(0,135px);-ms-transform: translate(0,135px); -webkit-animation-timing: ease-out;
+}
+55% { -webkit-transform: translate3d(0,101px,0);-moz-transform: translate(0,101px);-ms-transform: translate(0,101px); -webkit-animation-timing: ease-in;
+}
+71% { -webkit-transform: translate3d(0,135px,0);-moz-transform: translate(0,135px);-ms-transform: translate(0,135px); -webkit-animation-timing: ease-out;
+}
+81% { -webkit-transform: translate3d(0,126px,0);-moz-transform: translate(0,126px);-ms-transform: translate(0,126px); -webkit-animation-timing: ease-in;
+}
+90% { -webkit-transform: translate3d(0,135px,0);-moz-transform: translate(0,135px);-ms-transform: translate(0,135px); -webkit-animation-timing: ease-out;
+}
+94% { -webkit-transform: translate3d(0,132px,0);-moz-transform: translate(0,132px);-ms-transform: translate(0,132px); -webkit-animation-timing: ease-in;
+}
+100% { -webkit-transform: translate3d(0,135px,0);-moz-transform: translate(0,135px);-ms-transform: translate(0,135px); -webkit-animation-timing: ease-out;
+}
 }
 
 .level-1 {
+   visibility: visible;
 -ms-transform: translate(0,180px);
 -moz-transform: translate(0,180px);
 -webkit-transform: translate3d(0,180px,0);
@@ -33,6 +47,8 @@
 }
 
 .level-2 {
+   visibility: visible;
+
 -ms-transform: translate(0,225px);
 -moz-transform: translate(0,225px);
 -webkit-transform: translate3d(0,225px,0);
@@ -50,6 +66,8 @@
 }
 
 .level-3 {
+   visibility: visible;
+
 -ms-transform: translate(0,270px);
 -moz-transform: translate(0,270px);
 -webkit-transform: translate3d(0,270px,0);
@@ -67,6 +85,8 @@
 }
 
 .level-4 {
+   visibility: visible;
+
 -ms-transform: translate(0,315px);
 -moz-transform: translate(0,315px);
 -webkit-transform: translate3d(0,315px,0);
@@ -84,6 +104,7 @@
 }
 
 .level-5 {
+   visibility: visible;
 -ms-transform: translate(0,360px);
 -moz-transform: translate(0,360px);
 -webkit-transform: translate3d(0,360px,0);
