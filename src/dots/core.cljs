@@ -1,6 +1,5 @@
 (ns dots.core
   (:require
-   
    [cljs.core.async :as async
     :refer [<! >! chan close! sliding-buffer put! alts! timeout]]
    [jayq.core :refer [$ append ajax html css $deferred
@@ -13,6 +12,7 @@
    [goog.object :as gobj])
   (:require-macros [cljs.core.async.macros :as m :refer [go alt!]]))
 
+(enable-console-print!)
 
 (defn select-chan [pred chans]
   (go (loop []
@@ -35,8 +35,9 @@
 (defn touchevent-chan [rc selector event msg-name]
   (bind ($ selector) event
         #(let [touch (aget (gobj/get (gobj/get % "originalEvent") "touches") 0)]
-           (put! rc [msg-name {:x (gobj/get % "pageX")
-                               :y (gobj/get % "pageY")}]))))
+           
+           (put! rc [msg-name {:x (gobj/get touch "pageX")
+                               :y (gobj/get touch "pageY")}]))))
 
 (defn drawstart-chan [ichan selector]
   (mouseevent-chan ichan selector "mousedown" :drawstart)
@@ -287,6 +288,7 @@
          (erase-dot-chain)
          (assoc state :dot-chain (dot-positions-for-focused-color state) :exclude-color color))
        (let [[msg point] (<! draw-ch)]
+         #_(prn [msg point])
          (if (= msg :drawend)
            (do (erase-dot-chain) state)
            (recur state
@@ -404,6 +406,6 @@
        (<! (select-chan #(= [:start-new-game] %) [start-chan draw-ch]))       
        (recur)))))
 
+(defonce loop-identity (app-loop))
 
 
-(app-loop)
