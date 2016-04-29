@@ -4,7 +4,7 @@
    [cljs.core.async :as async
     :refer [<! >! chan close! sliding-buffer put! alts! timeout]]
    [jayq.core :refer [$ append ajax inner css $deferred
-                      when done resolve pipe on bind attr
+                      done resolve pipe on bind attr
                       offset] :as jq]
    [jayq.util :refer [log]]
    [crate.core :as crate]
