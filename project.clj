@@ -3,26 +3,22 @@
   :url ""
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [
-                 [org.clojure/clojure "1.5.1"]
-                 [org.clojure/clojurescript "0.0-1844"]
-                 [core.async "0.1.0-SNAPSHOT"]
-                 [crate "0.2.4"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [org.clojure/clojurescript "1.7.228"]
+                 [org.clojure/core.async "0.2.374"]
+                 ;; for todos async
                  [jayq "2.4.0"]
-                 [com.cemerick/piggieback "0.0.5"]
-                 ]
-  :profiles {:dev {:source-paths ["dev"]}}  
-  :plugins [[lein-cljsbuild "0.3.2"]]
-  :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+                 [crate "0.2.5"]]
+
+  :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
+  
+  :plugins [[lein-cljsbuild "1.1.3"]
+            [lein-figwheel "0.5.2"]]
   :cljsbuild {
-              :builds [{:source-paths ["src/dots"]
+              :builds [{:id "prod"
+                        :source-paths ["src"]
                         :compiler {:output-to "resources/public/js/compiled/dots.js"
                                    :externs ["resources/public/js/externs/jquery-1.9.js"]
                                    :optimizations :simple
                                    ;; :source-map "resources/public/js/compiled/dots.map"
-                                   :pretty-print true}}
-                       {:id "pigrep"
-                        :source-paths ["src/pigrep"]
-                        :compiler {:output-to "resources/public/js/compiled/pigrep.js"
-                                   :optimizations :simple
                                    :pretty-print true}}]})
