@@ -3,14 +3,16 @@
    
    [cljs.core.async :as async
     :refer [<! >! chan close! sliding-buffer put! alts! timeout]]
-   [jayq.core :refer [$ append ajax inner css $deferred
+   [jayq.core :refer [$ append ajax html css $deferred
                       done resolve pipe on bind attr
                       offset] :as jq]
    [jayq.util :refer [log]]
    [crate.core :as crate]
    [clojure.string :refer [join blank? replace-first]]
-   [clojure.set :refer [union]])
+   [clojure.set :refer [union]]
+   [goog.object :as gobj])
   (:require-macros [cljs.core.async.macros :as m :refer [go alt!]]))
+
 
 (defn select-chan [pred chans]
   (go (loop []
@@ -27,12 +29,14 @@
 (defn mouseevent-chan [rc selector event msg-name]
   (bind ($ selector) event
         #(do
-           (put! rc [msg-name {:x (.-pageX %) :y (.-pageY %)}]))))
+           (put! rc [msg-name {:x (gobj/get % "pageX")
+                               :y (gobj/get % "pageY")}]))))
 
 (defn touchevent-chan [rc selector event msg-name]
   (bind ($ selector) event
-        #(let [touch (aget (.-touches (.-originalEvent %)) 0)]
-           (put! rc [msg-name {:x (.-pageX touch) :y (.-pageY touch)}]))))
+        #(let [touch (aget (gobj/get (gobj/get % "originalEvent") "touches") 0)]
+           (put! rc [msg-name {:x (gobj/get % "pageX")
+                               :y (gobj/get % "pageY")}]))))
 
 (defn drawstart-chan [ichan selector]
   (mouseevent-chan ichan selector "mousedown" :drawstart)
@@ -73,14 +77,14 @@
 (def dot-size 22)
 (def corner-offset (- grid-unit-size dot-size))
 
-(defn rand-colors [exclude-color]
-  (log "getting colors" (prn-str exclude-color))
-  (let [colors (if exclude-color (vec (remove (partial = exclude-color) dot-colors))
-                   dot-colors)
-        number-colors (if exclude-color (dec number-colors) number-colors)]
-    (log "getting colors" (prn-str colors))
-    (map #(get colors (rand-int %))
-         (repeat number-colors))))
+(defn rand-colors
+  ([exclude-color]
+   (let [colors (if exclude-color (vec (remove (partial = exclude-color) dot-colors))
+                    dot-colors)
+         number-colors (if exclude-color (dec number-colors) number-colors)]
+     (map #(get colors (rand-int %))
+          (repeat number-colors))))
+  ([] (rand-colors nil)))
 
 (def reverse-board-position (partial - (dec board-size)))
 (def pos->coord #(+ corner-offset (* grid-unit-size %)))
@@ -175,7 +179,7 @@
 
 (defn render-view [state]
   (let [view-dom (crate/html (board state))]
-      (inner ($ ".dots-game-container") view-dom)
+      (html ($ ".dots-game-container") view-dom)
       (mapv add-dots-to-board (state :board))))
 
 (defn dot-index [offset {:keys [x y]}]
@@ -231,13 +235,13 @@
                                  (last dot-chain)
                                  color)))
             (.remove (.last ($ ".dots-game .chain-line .line"))))
-          (inner ($ ".dots-game .chain-line") ""))
+          (html ($ ".dots-game .chain-line") ""))
         (append ($ ".dots-game .dot-highlights")
                 (crate/html (dot-highlight-templ (last dot-chain) color)))))))
 
 (defn erase-dot-chain []
-  (inner ($ ".dots-game .chain-line") "")
-  (inner ($ ".dots-game .dot-highlights") ""))
+  (html ($ ".dots-game .chain-line") "")
+  (html ($ ".dots-game .dot-highlights") ""))
 
 (defn transition-dot-chain-state [{:keys [dot-chain] :as state} dot-pos]
   (if (dot-follows? state (last dot-chain) dot-pos)
@@ -338,11 +342,11 @@
     board)))
 
 (defn render-score [{:keys [score]}]
-  (inner ($ ".score-val") score))
+  (html ($ ".score-val") score))
 
 (defn game-timer [seconds]
   (go (loop [timer (timeout 1000) time seconds]
-        (inner ($ ".time-val") time)
+        (html ($ ".time-val") time)
         (<! timer)
         (if (zero? time)
           time
@@ -386,7 +390,7 @@
 
 (defn render-screen [screen]
   (let [view-dom (crate/html screen)]
-    (inner ($ ".dots-game-container") view-dom)))
+    (html ($ ".dots-game-container") view-dom)))
 
 (defn app-loop []
   (let [draw-ch (draw-chan "body")
@@ -399,6 +403,7 @@
          (render-screen (score-screen score)))
        (<! (select-chan #(= [:start-new-game] %) [start-chan draw-ch]))       
        (recur)))))
+
 
 
 (app-loop)

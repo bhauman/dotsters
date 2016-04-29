@@ -19,6 +19,9 @@
                         :source-paths ["src"]
                         :compiler {:output-to "resources/public/js/compiled/dots.js"
                                    :externs ["resources/public/js/externs/jquery-1.9.js"]
-                                   :optimizations :simple
+                                   ; :optimizations :whitespace
+                                   :optimizations :advanced
+                                   ;:pseudo-names true
                                    ;; :source-map "resources/public/js/compiled/dots.map"
-                                   :pretty-print true}}]})
+                                   ;:pretty-print true
+                                   }}]})
