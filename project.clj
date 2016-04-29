@@ -14,14 +14,19 @@
   
   :plugins [[lein-cljsbuild "1.1.3"]
             [lein-figwheel "0.5.2"]]
+  
   :cljsbuild {
-              :builds [{:id "prod"
+              :builds [{:id "dev"
+                        :source-paths ["src"]
+                        :figwheel true
+                        :compiler {:main "dots.core"
+                                   :asset-path "js/compiled/dev-out"
+                                   :output-to "resources/public/js/compiled/dots.js"
+                                   :output-dir "resources/public/js/compiled/dev-out"
+                                   :source-map true
+                                   :optimizations :none}}
+                       {:id "prod"
                         :source-paths ["src"]
                         :compiler {:output-to "resources/public/js/compiled/dots.js"
                                    :externs ["resources/public/js/externs/jquery-1.9.js"]
-                                   ; :optimizations :whitespace
-                                   :optimizations :advanced
-                                   ;:pseudo-names true
-                                   ;; :source-map "resources/public/js/compiled/dots.map"
-                                   ;:pretty-print true
-                                   }}]})
+                                   :optimizations :advanced }}]})
